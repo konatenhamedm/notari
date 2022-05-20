@@ -21,6 +21,8 @@ class ModuleType extends AbstractType
                 'class' => Icons::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
+                        ->where('u.active = :val')
+                        ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
                 'choice_label' => 'code',
@@ -43,6 +45,8 @@ class ModuleType extends AbstractType
                 'class' => ModuleParent::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
+                        ->where('u.active = :val')
+                        ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
                 'choice_label' => 'titre',

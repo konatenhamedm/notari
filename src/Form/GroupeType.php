@@ -46,6 +46,8 @@ class GroupeType extends AbstractType
                 'class' => Icons::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
+                        ->where('u.active = :val')
+                        ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
                 'label'=>false,

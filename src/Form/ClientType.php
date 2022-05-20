@@ -49,6 +49,8 @@ class ClientType extends AbstractType
                 'class' => TypeClient::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
+                        ->where('u.active = :val')
+                        ->setParameter('val', 1)
                         ->orderBy('u.id', 'ASC');
                 },
                 'label' => 'type',
