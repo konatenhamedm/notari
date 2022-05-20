@@ -1,5 +1,6 @@
 
 {% block page_content %}
+{% set new = menu.getRoute |slice(0, -8) %}
 
     <div class="modal-header bg-secondary-gradient">
         <h2 class="modal-title">ARCHIVE-{{ titre | upper  }}</h2>
@@ -28,7 +29,7 @@
 {% endfor %}
     </div>
     <div class="modal-footer">
-        <a href="{{ path('acte') }}" class="btn btn-secondary">Fermer</a>
+        <a href="{{ path(new) }}" class="btn btn-secondary">Fermer</a>
         {# <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>#}
 
     </div>
