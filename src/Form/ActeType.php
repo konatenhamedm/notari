@@ -54,6 +54,8 @@ class ActeType extends AbstractType
                 'class' => Client::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
+                        ->where('u.active = :val')
+                        ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
                 'label' => 'Vendeur',
@@ -65,6 +67,8 @@ class ActeType extends AbstractType
                 'class' => Client::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
+                        ->where('u.active = :val')
+                        ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
                 'label' => 'Acheteur',

@@ -63,9 +63,11 @@ class CourierArriveType extends AbstractType
                 'class' => User::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
+                        ->where('u.active = :val')
+                        ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
-                'label' => 'Réceptionné par',
+                'label' =>'Réceptionné par',
                 'choice_label' => 'nom',
 
             ])
@@ -73,11 +75,14 @@ class CourierArriveType extends AbstractType
             ->add('expediteur', TextType::class,[
                 'required' => false,
             ])
+
             ->add('recep', EntityType::class, [
                 'required' => false,
                 'class' => Client::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
+                        ->where('u.active = :val')
+                        ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
                 'label' => 'Réceptionné par',

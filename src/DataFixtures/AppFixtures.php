@@ -39,13 +39,13 @@ class AppFixtures extends Fixture
 
         $parent = new ModuleParent();
         $parent->setTitre('PARAMETRAGES');
-        $parent->setOrdre(2);
+        $parent->setOrdre(1);
         $parent->setActive(1);
         $manager->persist($parent);
 
         $mod2 = new Module();
         $mod2->setTitre('Paramétrage')
-            ->setOrdre(2)
+            ->setOrdre(1)
             ->setActive(1)
             ->setIcon($icon)
             ->setParent($parent);
@@ -75,15 +75,18 @@ class AppFixtures extends Fixture
             ->setTitre("Frais par type d'acte");
         $manager->persist($groupe8);
 
+
         $parent1 = new ModuleParent();
-        $parent1->setTitre('GESTION AGENDA');
-        $parent1->setOrdre(1);
+        $parent1->setTitre('NOTARI');
+        $parent1->setOrdre(2);
         $parent1->setActive(1);
         $manager->persist($parent1);
 
+
+
         $mod_ = new Module();
         $mod_->setTitre('Gestion agenda');
-        $mod_->setOrdre(1);
+        $mod_->setOrdre(2);
         $mod_->setActive(1);
         $mod_->setIcon($icon);
         $mod_->setParent($parent1);
@@ -106,16 +109,9 @@ class AppFixtures extends Fixture
         $manager->persist($groupe_2);
 
 
-
-        $parent1 = new ModuleParent();
-        $parent1->setTitre('NOTARI');
-        $parent1->setOrdre(3);
-        $parent1->setActive(1);
-        $manager->persist($parent1);
-
         $mod1 = new Module();
         $mod1->setTitre('Gestion des courriers');
-        $mod1->setOrdre(2);
+        $mod1->setOrdre(3);
         $mod1->setActive(1);
         $mod1->setIcon($icon);
         $mod1->setParent($parent1);
