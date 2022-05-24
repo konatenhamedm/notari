@@ -39,6 +39,11 @@ class Icons
      */
     private $modules;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $active;
+
     public function __construct()
     {
         $this->groupes = new ArrayCollection();
@@ -130,6 +135,18 @@ class Icons
                 $module->setIcon(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActive(): ?string
+    {
+        return $this->active;
+    }
+
+    public function setActive(string $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

@@ -27,15 +27,34 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        $icon1 = new Icons();
-        $icon1->setCode("tio-circle");
-        $icon1->setImage("");
-        $manager->persist($icon1);
+        $array = [
+            "1"=>"fe fe-home",
+            "2"=> "fe fe-slack",
+             "3"=>"fe fe-layers",
+             "4"=>"fe-shopping-bag",
+             "5"=>"fe fe-users",
+             "6"=>"fe-chevron-right",
+             "7"=>"fe fe-grid",
+             "8"=>"fe fe-send",
+             "9"=>"fe-map-pin",
+             "10"=>"fe fe-bar-chart-2",
+        ];
 
+        foreach ($array as $e){
         $icon = new Icons();
-        $icon->setCode("tio-apps");
+        $icon->setCode($e);
         $icon->setImage("");
+        $icon->setActive(1);
         $manager->persist($icon);
+
+    }
+
+
+        $icon1 = new Icons();
+        $icon1->setCode("tio-apps");
+        $icon1->setImage("");
+        $icon1->setActive(1);
+        $manager->persist($icon1);
 
         $parent = new ModuleParent();
         $parent->setTitre('PARAMETRAGES');

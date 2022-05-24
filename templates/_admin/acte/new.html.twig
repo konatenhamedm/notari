@@ -25,27 +25,7 @@
     {{ form_start(form, {'attr': {'role':'form', 'class': 'form'}}) }}
     <div class="modal-body">
         <div class="contenu" style="margin-top: -10px">
-             <div class="row">
-                    <div class="col-md-6 mt-2">
-                        <div class="toast align-items-center text-white bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-                            <div class="d-flex">
-                                <div class="toast-body">
-                                    S'il vous veillez selectionnez un  type d'acte
-                                </div>
-                                <button aria-label="Close" class="btn-close fs-20 ms-auto mt-2 pe-2" data-bs-dismiss="toast"><span aria-hidden="true">×</span></button>
-                            </div>
-                        </div>
-                    </div>
-            </div>
 
-
-            <div class="row">
-                <div class="form-group col-md-6 ">
-                    <label class="sr-onl" for="userinput1">Type de l'acte</label>
-                    {{ form_widget(form.typeActe,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Veillez selectionner un type','required':'required'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
-            </div>
             <div class="row">
                 <div class="form-group col-md-4 ">
                     <label class="sr-onl" for="userinput1">Date</label>
@@ -53,14 +33,26 @@
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="sr-onl" for="userinput1">Numéro de l'acte</label>
-                    {{ form_widget(form.numero,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro Acte' }}) }}
+                    <label class="sr-onl" for="userinput1">Numéro du dossier</label>
+                    {{ form_widget(form.numero,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro du dossier' }}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
                 <div class="form-group col-md-4 vente">
                     <label class="sr-onl" for="userinput1">Montant de la transaction</label>
                     {{ form_widget(form.montant,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Montant de la transaction','required':'required'}}) }}
 
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 vente">
+                    <label class="sr-onl" for="userinput1">Vendeur</label>
+                    {{ form_widget(form.vendeur,{'attr':{'class':'form-select form-control border-primary ','id':'userinput1','placeholder':'Vendeur','required':'required'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+                <div class="form-group col-md-6 vente">
+                    <label class="sr-onl" for="userinput1">Acheteur</label>
+                    {{ form_widget(form.acheteur,{'attr':{'class':'form-select form-control border-primary','id':'userinput1','placeholder':'Acheteur','required':'required'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
 
             </div>
@@ -74,7 +66,7 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-12 vente">
-                    <label class="sr-onl" for="userinput1">Details</label>
+                    <label class="sr-onl" for="userinput1">Détails</label>
                     {{ form_widget(form.detail,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Details'}}) }}
 
                 </div>
@@ -88,19 +80,7 @@
                 </div>
 
             </div>
-            <div class="row">
-                <div class="form-group col-md-6 vente">
-                    <label class="sr-onl" for="userinput1">Vendeur</label>
-                    {{ form_widget(form.vendeur,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Vendeur','required':'required'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
-                <div class="form-group col-md-6 vente">
-                    <label class="sr-onl" for="userinput1">Acheteur</label>
-                    {{ form_widget(form.acheteur,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Acheteur','required':'required'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
 
-            </div>
 
 
         </div>
@@ -123,7 +103,7 @@
                     fichier </a>
             </div>
             {% for row in form.fichiers %}
-                <span class="container col-md-12">
+                <span class="container col-12">
                     {{ image(row|e) }}
 
                 </span>
@@ -148,15 +128,20 @@
 
     <script src="{{ asset('admin/admin/js/jquery3.1.js') }}"></script>
     <script src="{{ asset('admin/admin/js/groupe.js') }}"></script>
+
     <script>
 
+/*
 
             $('#acte_typeActe').on('change',function (e) {
-                //alert('hhh')
-                const value = $(this).val()
+                select = document.getElementById('acte_typeActe');
+                choice = select.selectedIndex  // Récupération de l'index du <option> choisi
+
+                const valeur = select.options[choice].text;
+
 
                 console.log(e)
-                if(value != 1){
+                if(value !== "VENTE"){
 
                     $('.vente').hide()
                     }else {
@@ -166,6 +151,7 @@
 
 
             })
+*/
 
 
 

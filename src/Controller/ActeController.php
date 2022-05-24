@@ -70,7 +70,7 @@ class ActeController extends AbstractController
         ]);
 
         return $this->render('_admin/acte/voir.html.twig', [
-            'titre'=>'ACTE',
+            'titre'=>'ACTE DE VENTE',
             'data'=>$repository->getFichier($id),
             'acte' => $acte,
             'form' => $form->createView(),
@@ -88,7 +88,7 @@ class ActeController extends AbstractController
 
 
         return $this->render('_admin/acte/archive.html.twig', [
-            'titre'=>'Acte',
+            'titre'=>'ACTE DE VENTE',
             'data'=>$repository->getFichier($id),
 
         ]);
@@ -159,7 +159,7 @@ class ActeController extends AbstractController
         }
 
         return $this->render('_admin/acte/new.html.twig', [
-            'titre'=>'ACTE',
+            'titre'=>'ACTE DE VENTE',
             'acte' => $acte,
             'form' => $form->createView(),
         ]);
@@ -230,7 +230,7 @@ class ActeController extends AbstractController
         }
 
         return $this->render('_admin/acte/type.html.twig', [
-            'titre'=>'ACTE',
+            'titre'=>'ACTE DE VENTE',
             'acte' => $acte,
             'form' => $form->createView(),
         ]);
@@ -290,7 +290,7 @@ class ActeController extends AbstractController
         }
 
         return $this->render('_admin/acte/edit.html.twig', [
-            'titre'=>'ACTE',
+            'titre'=>'ACTE DE VENTE',
             'data'=>$repository->getFichier($id),
             'acte' => $acte,
             'form' => $form->createView(),

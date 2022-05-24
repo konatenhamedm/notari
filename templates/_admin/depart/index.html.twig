@@ -37,37 +37,7 @@
 
                 </div>
                 <div class="card-body">
-                  {#  <div class="table-responsive">
-                        <table id="example2" class="table table-bordered text-nowrap border-bottom">
-                            <thead>
 
-                            {% include '_admin/_tableau/header.html.twig' with {'tableau':tableau  }%}
-
-                            </thead>
-                            <tbody>
-                            {% for data in pagination %}
-                                <tr>
-
-                                    <td >
-                                        {{ data.numero }}
-                                    </td>
-                                    <td >
-                                        {{ data.dateReception | date("m-d-Y") }}
-                                    </td>
-                                    <td >
-                                        {{ data.objet }}
-                                    </td>
-                                    <td >
-                                        {{ data.exp.nom }}
-                                    </td>
-                                    {% include '_admin/_tableau/action.html.twig' with {'module':new ,'data':data }%}
-
-                                </tr>
-                            {% endfor %}
-
-                            </tbody>
-                        </table>
-                    </div>#}
 
                     <div class="tab-menu-heading">
                         <div class="tabs-menu">
@@ -103,7 +73,7 @@
                                                     {{ data.objet }}
                                                 </td>
                                                 <td >
-                                                    {{ data.exp.nom }}
+                                                    {{ data.expediteur }}
                                                 </td>
                                                 {% include '_admin/_tableau/action.html.twig' with {'module':new ,'data':data }%}
 
@@ -136,7 +106,7 @@
                                                     {{ data.objet }}
                                                 </td>
                                                 <td >
-                                                    {{ data.exp.nom }}
+                                                    {{ data.expediteur }}
                                                 </td>
                                                 {% include '_admin/_tableau/action.html.twig' with {'module':new ,'data':data }%}
 

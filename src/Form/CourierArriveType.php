@@ -68,7 +68,11 @@ class CourierArriveType extends AbstractType
                         ->orderBy('u.id', 'DESC');
                 },
                 'label' =>'Réceptionné par',
-                'choice_label' => 'nom',
+              'placeholder' => 'Selectionner un recepteur',
+                'choice_label' => function ($user) {
+                    return $user->getNom() . ' ' . $user->getPrenoms();
+                },
+              'attr'=>['class' =>'form-control select2','id'=>'validationCustom05']
 
             ])
 
@@ -86,7 +90,16 @@ class CourierArriveType extends AbstractType
                         ->orderBy('u.id', 'DESC');
                 },
                 'label' => 'Réceptionné par',
-                'choice_label' => 'nom',
+                'placeholder' => 'Selectionner un recepteur',
+                'choice_label' => function ($client) {
+                    if ($client->getRaisonSocial() == "") {
+                        return $client->getNom() . ' ' . $client->getPrenom();
+                    } else {
+
+                        return $client->getRaisonSocial();
+                    }
+                },
+                'attr'=>['class' =>'form-control select2','id'=>'validationCustom05']
 
             ])
             ->add('fichiers', CollectionType::class, [

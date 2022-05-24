@@ -67,10 +67,7 @@ class Acte
      */
     private $archives;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="actes")
-     */
-    private $type_acte;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -240,18 +237,6 @@ class Acte
                 $archive->setActe(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getTypeActe(): ?Type
-    {
-        return $this->type_acte;
-    }
-
-    public function setTypeActe(?Type $type_acte): self
-    {
-        $this->type_acte = $type_acte;
 
         return $this;
     }

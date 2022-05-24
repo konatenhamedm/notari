@@ -37,7 +37,7 @@
 
             <div class="row">
                 <div class="form-group col-md-4 ">
-                    <label class="sr-onl" for="userinput1">Type de l'acte</label>
+                    <label class="sr-onl" for="userinput1">Type de client</label>
                     {{ form_widget(form.type_client,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Veillez selectionner un type','required':'required'}}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
@@ -425,8 +425,14 @@
                })
                $('.moral').hide()
                $('#client_type_client').on('change',function () {
-                   var valeur = $(this).val();
-                   if(valeur != 1){
+
+                    select = document.getElementById('client_type_client');
+                    choice = select.selectedIndex  // Récupération de l'index du <option> choisi
+
+                   const valeur = select.options[choice].text;
+
+
+                   if(valeur !== "Particulier"){
 
                        $('.moral').show()
                        $('.moral_sub').show()

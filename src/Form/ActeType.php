@@ -58,8 +58,18 @@ class ActeType extends AbstractType
                         ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
-                'label' => 'Vendeur',
-                'choice_label' => 'nom',
+
+                'placeholder' => 'Selectionner le vendeur',
+                'choice_label' => function ($client) {
+                    if ($client->getRaisonSocial() == "") {
+                        return $client->getNom() . ' ' . $client->getPrenom();
+                    } else {
+
+                        return $client->getRaisonSocial();
+                    }
+                },
+                'attr'=>['class' =>'form-control select2','id'=>'validationCustom04']
+
 
             ])
             ->add('acheteur',EntityType::class, [
@@ -72,11 +82,19 @@ class ActeType extends AbstractType
                         ->orderBy('u.id', 'DESC');
                 },
                 'label' => 'Acheteur',
-                'choice_label' => 'nom',
+                'placeholder' => "Selectionner l'acheteur",
+                'choice_label' => function ($client) {
+                    if ($client->getRaisonSocial() == "") {
+                        return $client->getNom() . ' ' . $client->getPrenom();
+                    } else {
+
+                        return $client->getRaisonSocial();
+                    }
+                },
+                'attr'=>['class' =>'form-control select2','id'=>'validationCustom05']
 
             ])
-            ->add('etatBien',TextType::class)
-            ->add('typeActe',EntityType::class, [
+       /*     ->add('typeActe',EntityType::class, [
                 'class' => Type::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
@@ -86,8 +104,12 @@ class ActeType extends AbstractType
                 },
                 'choice_label' => 'titre',
                 'label' => false,
-               /* 'placeholder' => 'Selectionner un client',*/
-            ])
+                'placeholder' => "Selectionner le type de l'acte",
+                'attr'=>['class' =>'form-control  select2','id'=>'validationCustom05']
+
+            ])*/
+            ->add('etatBien',TextType::class)
+
         ;
     }
 

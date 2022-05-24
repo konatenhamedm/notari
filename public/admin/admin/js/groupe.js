@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     /*var $after = $('tr');*/
     /*var $newLinkLi = $('<li></li>').append($addTagButton);*/
-
+/*    addForm();*/
     $(document).ready(function () {
         $collectionHolder = $('#groupe');
         /*$collectionHolder.append($addTagButton);*/
@@ -38,7 +38,7 @@ $(document).ready(function () {
 
         addRemoveButton($card);
         $collectionHolder.children("input[type='hidden']:first").before($card)
-        //$collectionHolder.find('.after').before($card);
+        $collectionHolder.find('.after').before($card);
 
     }
 

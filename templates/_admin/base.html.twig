@@ -127,7 +127,8 @@
       <script src='{{ asset('admin/assets/plugins/fullcalendar/fullcalendar.min.js') }}'></script>
       <script src="{{ asset('admin/assets/js/fullcalendar.js') }}"></script>
 
-
+   <script src="{{ asset('admin/assets/plugins/select2/select2.full.min.js') }}"></script>
+   <script src="{{ asset('admin/assets/js/select2.js') }}"></script>
 
    <!-- Color Theme js -->
    <script src="{{ asset('admin/assets/js/themeColors.js') }}"></script>
@@ -145,9 +146,9 @@
 
        $(document).ready(function () {
 
-
            $(".modal").on('show.bs.modal', function (e) {
                let $target = $(e.relatedTarget);
+
                console.log($target)
                //alert("fffff");
                const $this = $(this);

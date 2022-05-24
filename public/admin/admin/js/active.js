@@ -10,14 +10,15 @@ function onClickBtnActive(event){
     const url = this.href;
     //console.log(icon.classList.value);
    // alert()
+
     $.ajax({
         url:      url,
         type:       'get',
         dataType:   'json',
         success: function(response,status){
-if (response.code === 200){
-    ligne.remove();
-}
+            if (response.code === 200){
+                ligne.remove();
+            }
             /*if(class_.classList.contains('btn-outline-success')){
                 class_.classList.replace('btn-outline-success','btn-outline-danger');
 

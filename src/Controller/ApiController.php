@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Calendar;
 use App\Repository\GroupeRepository;
+use App\Services\MailerService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -30,6 +33,29 @@ class ApiController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/mail", name="mail",methods={"GET"})
+     * @param MailerService $mailerService
+     * @return Response
+     */
+    public function sendEmail(MailerService $mailerService): Response
+    {
+        $mailerService->send(
+            'Bonsoir monsieur',
+            'konatenvaly@gmail.com',
+            "konatenhamed@gmail.com",
+            "_admin/contact/template.html.twig",
+            [
+                'message' =>  'Bonsoir monsieur',
+                'email' =>  'konatenhamed@gmail.com',
+                'nom' =>  'Konate',
+                'prenom' =>  'Hamed',
+                'telephone' =>  '0704314164'
+            ]
+        );
+return  $this->redirectToRoute('agenda');
+        // ...
+    }
 
     /**
      * @Route("/api/{id}/edit" , name="api_edit",methods={"PUT"})

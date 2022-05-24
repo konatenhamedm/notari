@@ -24,29 +24,7 @@
     {{ form_start(form, {'attr': {'role':'form', 'class': 'form'}}) }}
     <div class="modal-body">
         <div class="contenu" style="margin-top: -10px">
-            <div class="row">
-                <div class="col-md-6 mt-2">
-                    <div class="toast align-items-center text-white bg-danger border-0 show" role="alert"
-                         aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-                        <div class="d-flex">
-                            <div class="toast-body">
-                                S'il vous veillez selectionnez un type d'acte
-                            </div>
-                            <button aria-label="Close" class="btn-close fs-20 ms-auto mt-2 pe-2"
-                                    data-bs-dismiss="toast"><span aria-hidden="true">×</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-
-            <div class="row">
-                <div class="form-group col-md-6 ">
-                    <label class="sr-onl" for="userinput1">Type de l'acte</label>
-                    {{ form_widget(form.typeActe,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Veillez selectionner un type','required':'required'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
-            </div>
             <div class="row">
                 <div class="form-group col-md-4 ">
                     <label class="sr-onl" for="userinput1">Date</label>
@@ -54,8 +32,8 @@
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="sr-onl" for="userinput1">Numéro de l'acte</label>
-                    {{ form_widget(form.numero,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro Acte' }}) }}
+                    <label class="sr-onl" for="userinput1">Numéro du dossier</label>
+                    {{ form_widget(form.numero,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro du dossier' }}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
                 <div class="form-group col-md-4 ">
@@ -113,23 +91,24 @@
                 <a href="#" class="btn btn-secondary add_groupe" style="margin-left: -20px" data-card-tool="remove"
                    data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Card">Ajouter un
                     fichier </a>
-            </div><br>
+            </div>
+            <br>
             <h3 style="color: blue; text-decoration: underline;">Liste des documents</h3>
             <br>
                 {% for fichier in data %}
-                    <div class="row">
-           <div class="col-md-7">
-               <div class="form-group">
+            <div class="row">
+               <div class="col-md-7">
+                   <div class="form-group">
 
-                   <input class="form-control titre" type="text" value="{{ fichier.titre | upper }}">
+                       <input class="form-control titre" type="text" value="{{ fichier.titre | upper }}">
+                   </div>
+               </div>
+               <div class="col-md-3">
+                   <a class="btn btn-primary-gradient" target="_blank" href="{{ asset('uploads/images/' ~ fichier.path) }}"
+                      download> <i class="fe fe-download"></i>
+                       <span style="font-weight: bolder;color: white">Télecharger</span></a>
                </div>
            </div>
-           <div class="col-md-3">
-               <a class="btn btn-primary-gradient" target="_blank" href="{{ asset('uploads/images/' ~ fichier.path) }}"
-                  download> <i class="tio-download"></i>
-                   <span style="font-weight: bolder;color: white">Télecharger</span></a>
-           </div>
-       </div>
                 {% endfor %}
             {% for row in form.fichiers %}
                 <span class="container col-md-12 existe">
@@ -156,30 +135,8 @@
     {# <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>#}
     <script src="{{ asset('admin/admin/js/groupe.js') }}"></script>
     <script>
-        var element = $('#acte_typeActe');
-        $('.existe').remove();
-        const value = element.val();
-        if (value != 1) {
-
-            $('.vente').hide()
-        } else {
-            $('.vente').show()
-        }
+        $('.existe').remove()
         $('.titre').attr('readonly', true)
-        element.on('change', function (e) {
-            //alert('hhh')
-            const value = $(this).val()
-
-            console.log(e)
-            if (value != 1) {
-
-                $('.vente').hide()
-            } else {
-                $('.vente').show()
-            }
-
-
-        })
 
 
     </script>

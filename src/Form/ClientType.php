@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -51,7 +52,7 @@ class ClientType extends AbstractType
                     return $er->createQueryBuilder('u')
                         ->where('u.active = :val')
                         ->setParameter('val', 1)
-                        ->orderBy('u.id', 'ASC');
+                        ->orderBy('u.titre', 'DESC');
                 },
                 'label' => 'type',
                 'choice_label' => 'titre',
@@ -70,7 +71,7 @@ class ClientType extends AbstractType
                 'required'=>false
             ])
 
-            ->add('siteWeb',TextType::class,[
+            ->add('siteWeb',UrlType::class,[
                 'required'=>false
             ])
             ->add('nom',TextType::class,[

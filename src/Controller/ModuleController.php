@@ -29,7 +29,7 @@ class ModuleController extends AbstractController
 
         $pagination = $repository->findBy(['active'=>1]);
 
-        return $this->render('__admin/module/index.html.twig', [
+        return $this->render('_admin/module/index.html.twig', [
             'pagination' => $pagination,
             'tableau' => ['titre'=> 'titre','parent'=> 'parent','ordre'=> 'ordre'],
             'modal' => '',                  

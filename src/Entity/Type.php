@@ -25,11 +25,6 @@ class Type
     private $titre;
 
     /**
-     * @ORM\OneToMany(targetEntity=Acte::class, mappedBy="type_acte")
-     */
-    private $actes;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $active;
@@ -52,36 +47,6 @@ class Type
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Acte>
-     */
-    public function getActes(): Collection
-    {
-        return $this->actes;
-    }
-
-    public function addActe(Acte $acte): self
-    {
-        if (!$this->actes->contains($acte)) {
-            $this->actes[] = $acte;
-            $acte->setTypeActe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeActe(Acte $acte): self
-    {
-        if ($this->actes->removeElement($acte)) {
-            // set the owning side to null (unless already changed)
-            if ($acte->getTypeActe() === $this) {
-                $acte->setTypeActe(null);
-            }
-        }
 
         return $this;
     }

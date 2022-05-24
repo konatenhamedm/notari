@@ -1,8 +1,7 @@
 {% set action = module %}
 {% set data = data %}
-{#{{ dump(action) }}
-{{ dump(data.etat) }}#}
-<td width="100">
+{#{{ dump(action) }}#}
+<td width="100" class="action">
 
 
     <a title="Détails" class="btn  btn-sm btn-primary" href="{{ path( action ~ '_show',{'id':data.id}) }}" {% if modal=="modal" %} data-bs-toggle="modal" data-bs-target="#editUserModal" {% endif %}>
@@ -25,6 +24,11 @@
     {% if action == "acte" or action == "courierDepart" or action == "courierInterne" or action == "courierArrive"  %}
         <a title="Archive" class="btn  btn-sm btn-dark" href="{{ path( action ~ '_archive',{'id':data.id}) }}" {% if modal=="modal" %} data-bs-toggle="modal" data-bs-target="#editUserModal" {% endif %}>
             <i class="fe fe-file"></i>
+        </a>
+    {% endif %}
+    {% if action == "acteConstitution" %}
+        <a title="Suivi document" class="btn  btn-sm btn-dark" href="{{ path( action ~ '_archive',{'id':data.id}) }}" {% if modal=="modal" %} data-bs-toggle="modal" data-bs-target="#editUserModal" {% endif %}>
+            <i class="fe fe-book"></i>
         </a>
     {% endif %}
     {% if (action == "courierDepart") and data.etat == false %}

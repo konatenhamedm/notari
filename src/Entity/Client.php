@@ -309,6 +309,11 @@ class Client
      */
     private $acheteurs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ActeConstitution::class, mappedBy="client")
+     */
+    private $acteConstitutions;
+
 
     public function __construct()
     {
@@ -318,6 +323,17 @@ class Client
         $this->faitLe = new \DateTime('now');
         $this->vendeurs = new ArrayCollection();
         $this->acheteurs = new ArrayCollection();
+        $this->acteConstitutions = new ArrayCollection();
+    }
+
+    public  function getNomPrenoms(){
+        if ($this->raisonSocial== "") {
+            return $this->nom.' '.$this->prenom;
+        } else {
+
+            return $this->raisonSocial;
+        }
+
     }
 
     public function getId(): ?int
@@ -1053,6 +1069,36 @@ class Client
             // set the owning side to null (unless already changed)
             if ($acheteur->getAcheteur() === $this) {
                 $acheteur->setAcheteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ActeConstitution>
+     */
+    public function getActeConstitutions(): Collection
+    {
+        return $this->acteConstitutions;
+    }
+
+    public function addActeConstitution(ActeConstitution $acteConstitution): self
+    {
+        if (!$this->acteConstitutions->contains($acteConstitution)) {
+            $this->acteConstitutions[] = $acteConstitution;
+            $acteConstitution->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActeConstitution(ActeConstitution $acteConstitution): self
+    {
+        if ($this->acteConstitutions->removeElement($acteConstitution)) {
+            // set the owning side to null (unless already changed)
+            if ($acteConstitution->getClient() === $this) {
+                $acteConstitution->setClient(null);
             }
         }
 

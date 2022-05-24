@@ -31,34 +31,42 @@ class CalendarType extends AbstractType
                         ->orderBy('u.id', 'DESC');
                 },
                 'label' => 'Réceptionné par',
+                'placeholder' => "Selectionner le client",
                 'choice_label' => function ($client) {
-                    return $client->getNom() . ' ' . $client->getRaisonSocial();
+
+                    if ($client->getRaisonSocial() == "") {
+                        return $client->getNom() . ' ' . $client->getPrenom();
+                    } else {
+
+                        return $client->getRaisonSocial();
+                    }
+
                 },
+                'attr' => ['class' => 'form-control select2', 'id' => 'validationCustom05']
 
             ])
-            ->add('start',DateTimeType::class,[
+            ->add('start', DateTimeType::class, [
                 "required" => false,
                 "widget" => 'single_text',
                 "input_format" => 'Y-m-d',
                 "by_reference" => true,
                 "empty_data" => '',
             ])
-            ->add('end',DateTimeType::class,[
+            ->add('end', DateTimeType::class, [
                 "required" => false,
                 "widget" => 'single_text',
                 "input_format" => 'Y-m-d',
                 "by_reference" => true,
                 "empty_data" => '',
             ])
-            ->add('description',TextType::class)
-            ->add('all_day',CheckboxType::class, [
-'label'=>false,
-        'required' => false,
-    ])
-            ->add('background_color',ColorType::class)
-            ->add('border_color',ColorType::class)
-            ->add('text_color',ColorType::class)
-        ;
+            ->add('description', TextType::class)
+            ->add('all_day', CheckboxType::class, [
+                'label' => false,
+                'required' => false,
+            ])
+            ->add('background_color', ColorType::class)
+            ->add('border_color', ColorType::class)
+            ->add('text_color', ColorType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
