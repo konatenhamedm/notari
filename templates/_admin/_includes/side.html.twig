@@ -15,9 +15,9 @@
         <div class="main-sidemenu">
             <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"/></svg></div>
             <ul class="side-menu">
-                <li class="sub-category">
+              {#  <li class="sub-category">
                     <h3>Main</h3>
-                </li>
+                </li>#}
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="{{ path('dashboard') }}"><i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Tableau de bord</span></a>
                 </li>
@@ -28,9 +28,9 @@
                     <a class="side-menu__item" data-bs-toggle="slide" href="{{ path('agenda') }}"><i class="side-menu__icon fe fe-book"></i><span class="side-menu__label">Agenda</span></a>
                 </li>#}
                 {% for parent in menu.listeParent %}
-                <li class="sub-category">
+               {# <li class="sub-category">
                     <h3>{{ parent.parent }}</h3>
-                </li>
+                </li>#}
                 {#<span class="badge bg-pink side-badge">4</span><i class="angle fe fe-chevron-right hor-angle"></i><#}
                 {% for module in menu.listeModule %}
 
@@ -38,7 +38,7 @@
 
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                        <i class="side-menu__icon {% if module.icon %} {{ module.icon  }} {% else %} fe fe-slack{% endif %}">
+                        <i class="side-menu__icon {% if module.icon %} fe {{ module.icon  }} {% else %}  fe-slack{% endif %}">
 
                         </i><span class="side-menu__label">{{ module.module }}
                         </span><i class="angle fe fe-chevron-right"></i></a>

@@ -40,10 +40,10 @@ class TypeSocieteRepository extends ServiceEntityRepository
     }
     public function getFichier($value){
         return $this->createQueryBuilder("a")
-            ->select("f.path","f.libelle")
+            ->select("f.libelle")
             ->innerJoin('a.documents','f')
             ->where('a.id=:id')
-            ->andWhere('f.path IS NOT NULL')
+//            ->andWhere('f.path IS NOT NULL')
             ->setParameter('id', $value)
             ->getQuery()
             ->getResult();

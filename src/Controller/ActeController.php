@@ -45,7 +45,7 @@ class ActeController extends AbstractController
             'modal' => 'modal',
             'position' => 4,
             'active' => 7,
-            'titre' => 'Liste des acte',
+            'titre' => 'Liste des actes de vente',
 
         ]);
     }

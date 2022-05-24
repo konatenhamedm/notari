@@ -3,7 +3,7 @@
 {% block page_content %}
 
     <div class="modal-header bg-secondary-gradient">
-        <h2 class="modal-title" style="color: whitesmoke">EDITION-{{ titre | upper  }}</h2>
+        <h2 class="modal-title" style="margin-top: -15px;color: white">EDITION-{{ titre | upper  }}</h2>
         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>
@@ -36,14 +36,12 @@
         <span class="col-lg-12 groupe" id="groupe" data-prototype="{{ image(form.documents.vars.prototype)|e('html_attr') }}">
 
 
-              <h4>ARCHIVAGE DES DOCUMENTS</h4>
+              <h4>LISTE DES DOCUMENTS A FOURNIR</h4>
              <div class="col-md-12">
                 <a href="#" class="btn btn-secondary add_groupe" style="margin-left: -20px" data-card-tool="remove"
                    data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Card">Ajouter un
-                    fichier </a>
+                    document </a>
             </div>
-            <br>
-            <h3 style="color: blue; text-decoration: underline;">Liste des documents</h3>
             <br>
                 {% for fichier in data %}
             <div class="row">
@@ -53,11 +51,11 @@
                        <input class="form-control titre" type="text" value="{{ fichier.libelle | upper }}">
                    </div>
                </div>
-               <div class="col-md-3">
+             {#  <div class="col-md-3">
                    <a class="btn btn-primary-gradient" target="_blank" href="{{ asset('uploads/images/' ~ fichier.path) }}"
                       download> <i class="fe fe-download"></i>
                        <span style="font-weight: bolder;color: white">Télecharger</span></a>
-               </div>
+               </div>#}
            </div>
                 {% endfor %}
 

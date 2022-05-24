@@ -60,6 +60,7 @@ class Services
     {
         $array = [
             'module'=>'module',
+            'agenda'=>'agenda',
             'typeClient'=>'typeClient',
             'groupe'=>'groupe',
             'parent'=>'parent',

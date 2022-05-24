@@ -8793,23 +8793,23 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 		// By default the stirngs will be in the plugin source and here can override it
 		translate: {
 			records: {
-				processing: 'Please wait...',
-				noRecords: 'No records found',
+				processing: 'S il vous plaît, attendez...',
+				noRecords: 'Aucun enregistrement trouvé',
 			},
 			toolbar: {
 				pagination: {
 					items: {
 						default: {
-							first: 'First',
-							prev: 'Previous',
-							next: 'Next',
-							last: 'Last',
+							first: 'Prémier',
+							prev: 'Précédent',
+							next: 'Suivant',
+							last: 'Dernier',
 							more: 'More pages',
 							input: 'Page number',
 							select: 'Select page size',
-							all: 'all',
+							all: 'tout',
 						},
-						info: 'Showing {{start}} - {{end}} of {{total}}',
+						info: 'Affichage {{start}} - {{end}} of {{total}}',
 					},
 				},
 			},

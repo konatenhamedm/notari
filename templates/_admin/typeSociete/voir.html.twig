@@ -3,7 +3,7 @@
 {% block page_content %}
 
     <div class="modal-header bg-secondary-gradient">
-        <h2 class="modal-title" style="color: whitesmoke">DETAILS-{{ titre | upper  }}</h2>
+        <h2 class="modal-title" style="margin-top: -15px;color: white">DETAILS-{{ titre | upper  }}</h2>
         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>
@@ -45,14 +45,10 @@
                <div class="col-md-7">
                    <div class="form-group">
 
-                       <input class="form-control titre" type="text" value="{{ fichier.libelle | upper }}">
+                       <input class="form-control titre" type="text" value="{{ fichier.libelle | upper }}" readonly>
                    </div>
                </div>
-               <div class="col-md-3">
-                   <a class="btn btn-primary-gradient" target="_blank" href="{{ asset('uploads/images/' ~ fichier.path) }}"
-                      download> <i class="fe fe-download"></i>
-                       <span style="font-weight: bolder;color: white">Télecharger</span></a>
-               </div>
+
            </div>
            {% endfor %}
            {# <div class="col-md-12">

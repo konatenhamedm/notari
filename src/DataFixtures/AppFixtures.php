@@ -28,16 +28,19 @@ class AppFixtures extends Fixture
     {
 
         $array = [
-            "1"=>"fe fe-home",
-            "2"=> "fe fe-slack",
-             "3"=>"fe fe-layers",
+            "1"=>"fe-home",
+            "2"=> "fe-slack",
+             "3"=>"fe-layers",
              "4"=>"fe-shopping-bag",
-             "5"=>"fe fe-users",
+             "5"=>"fe-users",
              "6"=>"fe-chevron-right",
-             "7"=>"fe fe-grid",
-             "8"=>"fe fe-send",
+             "7"=>"fe-grid",
+             "8"=>"fe-send",
              "9"=>"fe-map-pin",
-             "10"=>"fe fe-bar-chart-2",
+             "10"=>"fe-bar-chart-2",
+             "11"=>"fe-setting",
+             "12"=>"fe-mail",
+             "13"=>"fe-book-open",
         ];
 
         foreach ($array as $e){
