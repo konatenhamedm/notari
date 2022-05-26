@@ -73,6 +73,7 @@
     <script src="{{ asset('admin/admin/js/jquery3.1.js') }}"></script>
     <script src="{{ asset('assets/HoldOn.min.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/locales/fr.js"></script>
     <script>
 
 
@@ -92,6 +93,13 @@
                     start :'prev,next today',
                     center: 'title',
                     end: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                buttonText: {
+                    today:    'Aujourd\'hui',
+                    month:    'Mois',
+                    week:     'Semaine',
+                    day:      'Jour',
+                    list:     'Liste'
                 },
                 eventRender: function(info) {
                     console.log(info)
