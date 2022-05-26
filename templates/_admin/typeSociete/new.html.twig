@@ -45,11 +45,11 @@
 
             {# </div>
              <br>#}
-              <h4>ARCHIVAGE DES DOCUMENTS</h4>
+              <h4>LISTE DES DOCUMENTS A FOURNIR</h4>
             <div class="col-md-12">
                 <a href="#" class="btn btn-secondary add_groupe" style="margin-left: -20px" data-card-tool="remove"
                    data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Card">Ajouter un
-                    fichier </a>
+                    document </a>
             </div>
             {% for row in form.documents %}
                 <span >
@@ -64,7 +64,7 @@
 
     </div>
     <div class="modal-footer">
-        <a href="{{ path('acte') }}" class="btn btn-secondary">Fermer</a>
+        <a href="{{ path('typeSociete') }}" class="btn btn-secondary">Fermer</a>
        {# <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>#}
         <button class="btn btn-primary">Valider</button>
     </div>

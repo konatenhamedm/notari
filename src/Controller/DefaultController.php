@@ -49,9 +49,40 @@ class DefaultController extends AbstractController
      * @Route("/admin/dashboard", name="dashboard", methods={"GET", "POST"})
      * @return Response
      */
-    public function dashboard()
+    public function dashboard(CalendarRepository $repository)
     {
-        return $this->render('_admin/dashboard/index.html.twig');
+
+        $listes = $repository->getEvenement();
+        $lignes = $repository->findAll();
+        $rdvs = [];
+
+        foreach ($lignes as $data){
+            $rdvs [] = [
+                'id'=>$data->getId(),
+                'start'=>$data->getStart()->format('Y-m-d H:i:s'),
+                'end'=>$data->getEnd()->format('Y-m-d H:i:s'),
+                'description'=>$data->getDescription(),
+                'title'=>$data->getTitle(),
+                'allDay'=>$data->getAllDay(),
+                'backgroundColor'=>$data->getBackgroundColor(),
+                'borderColor'=>$data->getBorderColor(),
+                'textColor'=>$data->getTextColor(),
+            ];
+        }
+
+        $data =  json_encode($rdvs);
+        return $this->render('_admin/dashboard/index.html.twig',compact('data','listes'));
+    }
+    /**
+     * @Route("/admin/{id}/event", name="event_detaiils", methods={"GET", "POST"})
+     * @return Response
+     */
+    public function detailsEvent($id,CalendarRepository $repository)
+    {
+        return $this->render('_admin/dashboard/info.html.twig',[
+            'titre'=>'EVENEMENT',
+            'data'=>$repository->findOneBy(['id'=>$id])
+        ]);
     }
 
     /**

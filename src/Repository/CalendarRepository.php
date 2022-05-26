@@ -45,6 +45,39 @@ class CalendarRepository extends ServiceEntityRepository
         }
     }
 
+    public function getEvenement()
+    {
+        return $this->createQueryBuilder("e")
+            ->select("e.title", "e.id")
+            ->orderBy('e.start', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getEventDatePasse()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+                $sql = "
+                    SELECT * 
+                    FROM calendar c
+                  where c.end > NOW() and c.active = 1
+                    ";
+        $stmt = $conn->executeQuery($sql);
+        return $stmt->fetchAllAssociative();
+    }
+    public function getEventDateValide()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql = "
+                    SELECT * 
+                    FROM calendar c
+                  where c.start <= NOW() and c.end <= NOW() and c.active = 1
+                    ";
+        $stmt = $conn->executeQuery($sql);
+        return $stmt->fetchAllAssociative();
+    }
     // /**
     //  * @return Calendar[] Returns an array of Calendar objects
     //  */

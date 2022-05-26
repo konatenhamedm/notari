@@ -59,14 +59,14 @@ class CalendarType extends AbstractType
                 "by_reference" => true,
                 "empty_data" => '',
             ])
-            ->add('description', TextType::class)
-            ->add('all_day', CheckboxType::class, [
+            ->add('description', TextType::class);
+           /* ->add('all_day', CheckboxType::class, [
                 'label' => false,
                 'required' => false,
             ])
             ->add('background_color', ColorType::class)
             ->add('border_color', ColorType::class)
-            ->add('text_color', ColorType::class);
+            ->add('text_color', ColorType::class);*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void

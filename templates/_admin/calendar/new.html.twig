@@ -9,19 +9,6 @@
     </div>
     {{ form_start(form, {'attr': {'role':'form', 'class': 'form'}}) }}
     <div class="modal-body ">
-        {# {{ include('includes/ajax/response.html.twig') }} #}
-        <div class="row">
-            <div class="form-group col-md-1">
-
-                {{ form_widget(form.all_day,{'attr':{'class':'border-primary checkbox','type':'checkbox','id':'userinput1'}}) }}
-
-            </div>
-            {# <div class="col-md-6 " style="margin-left: -55px;margin-top: -1px">
-
-                 <span style="font-weight: bolder">Numéro Automatique</span>
-             </div>#}
-
-        </div>
 
         <div class="contenu" style="margin-top: -10px">
             <div class="row">
@@ -57,23 +44,7 @@
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-4 ">
-                    <label class="sr-onl" for="userinput1">Couleur fond</label>
-                    {{ form_widget(form.background_color,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Vendeur','required':'required'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
-                <div class="form-group col-md-4 ">
-                    <label class="sr-onl" for="userinput1">Couleur de la bordure</label>
-                    {{ form_widget(form.border_color,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Couleur de la bordure','required':'required'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
-                <div class="form-group col-md-4 ">
-                    <label class="sr-onl" for="userinput1">Couleur du texte</label>
-                    {{ form_widget(form.text_color,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Couleur du texte','required':'required'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
-            </div>
+
 
         </div>
     </div>

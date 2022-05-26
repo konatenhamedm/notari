@@ -1105,7 +1105,15 @@ class Client
         return $this;
     }
 
+        public  function getIdentite(){
 
+            if ($this->getRaisonSocial() == "") {
+                return $this->getNom() . ' ' . $this->getPrenom();
+            } else {
+
+                return $this->getRaisonSocial();
+            }
+        }
 
 
 }

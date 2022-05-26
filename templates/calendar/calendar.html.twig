@@ -27,21 +27,27 @@
                         <div class="col-md-12 col-xl-3">
                             <div id="external-events">
                                 <h4>Les événements</h4>
-                                <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-primary">
+                               {# <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-primary">
                                     <div class="fc-event-main">My Event 1</div>
                                 </div>
                                 <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-secondary" data-class="bg-secondary">
                                     <div class="fc-event-main">My Event 2</div>
-                                </div>
+                                </div>#}
+                                {% for liste in listes %}
                                 <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-warning" data-class="bg-warning">
-                                    <div class="fc-event-main">My Event 3</div>
+                                    <div class="fc-event-main">
+                                        <a href="#"  data-bs-toggle="modal" data-bs-target="#extralargemodal">
+                                            <i class="fe fe-plus"></i>{{ liste.title }}
+                                        </a>
+                                         </div>
                                 </div>
-                                <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-success" data-class=" bg-info">
+                                {% endfor %}
+                                {#<div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-success" data-class=" bg-info">
                                     <div class="fc-event-main">My Event 4</div>
                                 </div>
                                 <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-danger" data-class="bg-danger">
                                     <div class="fc-event-main">My Event 5</div>
-                                </div>
+                                </div>#}
                             </div>
 
                         </div>

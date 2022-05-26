@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Calendar;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
+use App\Services\MailerService;
 use App\Services\PaginationService;
 use App\Services\UploaderHelper;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,22 +22,25 @@ class CalendarController extends AbstractController
 {
     /**
      * @Route("/calendar", name="calendar")
+     * @param CalendarRepository $repository
+     * @return Response
      */
     public function index(CalendarRepository $repository): Response
     {
-        $pagination = $repository->findBy(['active'=>1]);
-//dd($pagination);
+        $pagination = $repository->getEventDateValide();
+        $datePassee = $repository->getEventDatePasse();
+//dd($repository->getEventDatePasse());
         return $this->render('_admin/calendar/index.html.twig', [
             'pagination' => $pagination,
+            'passe' => $datePassee,
             'tableau' => ['titre'=>'titre'
-                ,'start'=> 'start'
-                ,'end'=> 'end'
-                ,'description'=> 'description'
+                ,'DEBUT'=> 'DEBUT'
+                ,'FIN'=> 'FIN'
+                //,'description'=> 'description'
                 //,'tout'=> 'tout'
             ],
             'modal' => 'modal',
-            'titre' => 'Liste des evenement',
-            'critereTitre'=>'',
+            'titre' => 'Liste des événements',
 
         ]);
     }
@@ -66,7 +70,7 @@ class CalendarController extends AbstractController
      * @param UploaderHelper $uploaderHelper
      * @return Response
      */
-    public function new(Request $request, EntityManagerInterface  $em,UploaderHelper  $uploaderHelper): Response
+    public function new(Request $request, EntityManagerInterface  $em,UploaderHelper  $uploaderHelper,MailerService $mailerService): Response
     {
         $calendar = new Calendar();
         $form = $this->createForm(CalendarType::class,$calendar, [
@@ -80,9 +84,38 @@ class CalendarController extends AbstractController
         if($form->isSubmitted())
         {
             $redirect = $this->generateUrl('calendar');
+           // dd($form->getData()->getClient());
+            $email = $form->getData()->getClient()->getEmail();
+            $identite = "";
 
+            if ($form->getData()->getClient()->getRaisonSocial() == ""){
+                $identite =$form->getData()->getClient()->getNom()." ".$form->getData()->getClient()->getPrenom() ;
+            }else{
+
+                $identite = $form->getData()->getClient()->getRaisonSocial();
+            }
+
+            $objet = $form->getData()->getDescription();
             if($form->isValid()){
-                $calendar->setActive(1);
+                $mailerService->send(
+                    'INFORMATION CONCERNANT LE RENDEZ-VOUS',
+                    'konatenvaly@gmail.com',
+                    $email,
+                    "_admin/contact/template.html.twig",
+                    [
+                        'message' =>  $objet,
+                        'entreprise' =>  "Notari",
+                        'identite' =>  $identite,
+                        'telephone' =>  '0704314164'
+                    ]
+                );
+
+                $calendar->setActive(1)
+                    ->setAllDay(false)
+                    ->setBackgroundColor("#31F74F")
+                    ->setBorderColor("#BBF0DA")
+                    ->setTextColor("#FAF421")
+                ;
                 $em->persist($calendar);
                 $em->flush();
 

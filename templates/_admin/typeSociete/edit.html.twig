@@ -42,8 +42,8 @@
                    data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Card">Ajouter un
                     document </a>
             </div>
-            <br>
-                {% for fichier in data %}
+
+               {# {% for fichier in data %}
             <div class="row">
                <div class="col-md-7">
                    <div class="form-group">
@@ -51,16 +51,16 @@
                        <input class="form-control titre" type="text" value="{{ fichier.libelle | upper }}">
                    </div>
                </div>
-             {#  <div class="col-md-3">
+             #}{#  <div class="col-md-3">
                    <a class="btn btn-primary-gradient" target="_blank" href="{{ asset('uploads/images/' ~ fichier.path) }}"
                       download> <i class="fe fe-download"></i>
                        <span style="font-weight: bolder;color: white">Télecharger</span></a>
-               </div>#}
+               </div>#}{#
            </div>
-                {% endfor %}
+                {% endfor %}#}
 
             {% for row in form.documents %}
-                <span class="existe">
+                <span class="container">
                     {{ image(row|e) }}
 
                 </span>
