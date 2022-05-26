@@ -22,6 +22,7 @@ class DefaultController extends AbstractController
      */
     public function calendar(CalendarRepository $repository,NormalizerInterface $normalizer)
     {
+        $listes = $repository->getEvenement();
       $ligne = $repository->findAll();
       $rdvs = [];
 
@@ -42,7 +43,7 @@ class DefaultController extends AbstractController
       $data =  json_encode($rdvs);
       //dd($data);
 
-        return $this->render("calendar/calendar.html.twig",compact('data'));
+        return $this->render("calendar/calendar.html.twig",compact('data','listes'));
     }
 
     /**

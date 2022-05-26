@@ -36,12 +36,15 @@
                                 {% for liste in listes %}
                                     <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-warning" data-class="bg-warning">
                                         <div class="fc-event-main">
-                                            <a href="{{ path('event_detaiils',{'id':liste.id }) }}"  data-bs-toggle="modal" data-bs-target="#largemodal">
+                                            <a class="" href="{{ path('event_detaiils',{'id':liste.id }) }}"  data-bs-toggle="modal" data-bs-target="#largemodal">
                                                 <i class="fe fe-plus"></i>{{ liste.title }}
                                             </a>
                                         </div>
                                     </div>
                                 {% endfor %}
+                                <button class="lancer" href="{{ path('event_detaiils',{'id':liste.id }) }}"  data-bs-toggle="modal" data-bs-target="#largemodal">
+                                    <i class="fe fe-plus"></i>{{ liste.title }}
+                                </button>
                                 {#<div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-success" data-class=" bg-info">
                                     <div class="fc-event-main">My Event 4</div>
                                 </div>
@@ -105,10 +108,11 @@
                 eventClick: function(calEvent, jsEvent, view, resourceObj) {
                     console.log(calEvent.event.title)
 
+                   $('.lancer').click();
                     /*Open Sweet Alert*/
                     swal({
                         title: calEvent.title,//Event Title
-                        text: calEvent.event.title+" Commence le : "+calEvent.event.start.toLocaleDateString("fr")+` et prend fin le\n`+calEvent.event.end,//Event Start Date
+                        text: calEvent.event.title+" Commence le : "+calEvent.event.start.toLocaleDateString("fr")+` et prend fin le `+calEvent.event.end.toLocaleDateString("fr")+`\n avec pour objet\n `+calEvent.event.extendedProps.description,//Event Start Date
                         icon: "success",
                     });
                 }
@@ -152,9 +156,7 @@
                     HoldOn.close();
                 }
             });
-            /*calendar.on('dateClick', function(info) {
-                console.log('clicked on ' + info.dateStr);
-            });*/
+           $('.swal-text').css("text-align", "center")
 
             calendar.render(function render(e) {
                 console.log(e)
