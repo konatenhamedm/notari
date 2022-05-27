@@ -45,7 +45,10 @@
 
 
     </head>
-    <body class="app sidebar-mini ltr">
+    <body class="app ltr horizontal">
+    <div class="horizontalMenucontainer">
+
+
    {% include '_admin/_includes/right.html.twig' %}
     <!-- End Switcher -->
 
@@ -60,12 +63,10 @@
                    <!-- /app-Header -->
                    <!--APP-SIDEBAR-->
                    {% include '_admin/_includes/side.html.twig' %}
+                   {% block body %}
 
+                   {% endblock %}
                </div>
-
-    {% block body %}
-
-    {% endblock %}
 
    <!-- Sidebar-right -->
    {% include '_admin/_includes/toast.html.twig' %}
@@ -77,6 +78,7 @@
    <!-- FOOTER -->
 {#   {% include '_admin/_includes/footer.html.twig' %}#}
    <!-- FOOTER CLOSED -->
+    </div>
    {% block javascripts %}
        {#   {{ encore_entry_script_tags('app') }}#}
    {% endblock %}

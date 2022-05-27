@@ -11,11 +11,17 @@
 
            </td>
            <td>
-
+{#{{ dump(image.children.path.vars.data) }}#}
             {{ form_row(image.path,{'attr':{'class':'form-control ','id':'userinput16','placeholder':'Le fichier join'}}) }}
 
            </td>
-            <td width="50">
+            <td >
+                <a class="btn btn-primary-gradient" target="_blank" href="{{ asset('uploads/images/' ~ image.children.path.vars.data) }}"
+                   download> <i class="fe fe-download"></i>
+                    <span style="font-weight: bolder;color: white">Télecharger</span></a>
+
+             </td>
+                <td width="50">
                 {{ form_row(image.etat,{'attr':{'class':'border-primary checkbox','type':'checkbox','id':'userinput1'}}) }}
 
              </td>

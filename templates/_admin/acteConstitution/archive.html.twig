@@ -24,7 +24,7 @@
                 <!-- Tabs -->
                 <ul class="nav panel-tabs panel-secondary">
                     <li><a href="#tab1" class="active" data-bs-toggle="tab"><span><i class="fe fe-user me-1"></i></span>Liste des documents </a></li>
-                    <li><a href="#tab2" data-bs-toggle="tab" class=""><span><i class="fe fe-calendar me-1"></i></span>Détails documents</a></li>
+                   {# <li><a href="#tab2" data-bs-toggle="tab" class=""><span><i class="fe fe-calendar me-1"></i></span>Détails documents</a></li>#}
 
                 </ul>
             </div>
@@ -129,18 +129,18 @@
                         </div>
                         <span class="col-lg-12 groupe" id="groupe" data-prototype="{{ image(form.fichierConstitutions.vars.prototype)|e('html_attr') }}">
 
-            {% for row in form.fichierConstitutions %}
-                <span class="container col-12">
-                    {{ image(row|e) }}
+                    {% for row in form.fichierConstitutions %}
+                        <span class="container col-12">
+                            {{ image(row|e) }}
 
-                </span>
-            {% endfor %}
+                        </span>
+                    {% endfor %}
  <input class="after" type="hidden"/>
         </span>
 
                     </div>
                 </div>
-                <div class="tab-pane" id="tab2">
+             {#   <div class="tab-pane" id="tab2">
                     <div class="table-responsive">
                         <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
                             <tbody>
@@ -171,7 +171,7 @@
                         </table>
 
                     </div>
-                </div>
+                </div>#}
 
             </div>
         </div>
