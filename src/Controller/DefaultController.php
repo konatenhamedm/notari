@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use App\Classe\Search;
-use App\Form\SearchType;
 use App\Repository\CalendarRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Services\PaginationService;
+use App\Repository\ChambreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +12,19 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class DefaultController extends AbstractController
 {
+
+    /**
+     * @Route("/", name="app_florence", methods={"post", "get"})
+     */
+    public function indexFlorence(ChambreRepository $repository): Response
+    {
+
+        $data = $repository->findAll();
+        return $this->render('_includes/index.html.twig',[
+            'data'=>$data
+        ]);
+    }
+
     /**
      * @Route("admin/agenda",name="agenda")
      * @param CalendarRepository $repository

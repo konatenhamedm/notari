@@ -241,6 +241,8 @@ class ActeController extends AbstractController
      * @param Request $request
      * @param Acte $acte
      * @param EntityManagerInterface $em
+     * @param $id
+     * @param ActeRepository $repository
      * @return Response
      */
     public function edit(Request $request,Acte $acte, EntityManagerInterface $em,$id,ActeRepository $repository): Response

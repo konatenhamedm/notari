@@ -29,8 +29,10 @@ class UserType extends AbstractType
                )
             ->add('password',RepeatedType::class,[
                 'type'=> PasswordType::class,
+                'required'=> $options['required'],
                 'invalid_message'=>'Le mot de passe et la confirmation doivent être identique',
-                'required'=>true,
+             'mapped'=>true,
+
                 'first_options'=> ['label'=>'Mot de passe'],
                 'second_options'=> ['label'=>'Confirmer votre mot de passe']
             ])
@@ -40,16 +42,15 @@ class UserType extends AbstractType
                     'expanded'     => false,
                     'placeholder' => 'Choisir un role',
                     'required'     => true,
-                    'attr' => ['class' => 'js-select2-custom'],
+                   // 'attr' => ['class' => '],
                     'multiple' => true,
                     //'choices_as_values' => true,
 
-                    'choices'  => [
+                    'choices'  => array_flip([
                         'ROLE_USER'        => 'Utilisateur',
                         'ROLE_ADMIN'       => 'Administrateur',
                         'ROLE_SUPER_ADMIN' => 'Super Administrateur',
-
-                    ],
+                    ]),
                 ])
 
         ;

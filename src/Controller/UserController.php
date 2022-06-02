@@ -62,7 +62,7 @@ class UserController extends AbstractController
             'action' => $this->generateUrl('user_new')
         ]);
         $form->handleRequest($request);
-
+        $statut =0;
         $isAjax = $request->isXmlHttpRequest();
         if($form->isSubmitted())
         {
@@ -70,10 +70,10 @@ class UserController extends AbstractController
             $redirect = $this->generateUrl('user');
             $statut = 1;
             //dd($form->isValid());
-            if($form->isValid()==false){
+            if($form->isValid()){
 
-                $password = $form->getData()->getPassword();
-
+                $password = $form->getData();
+//dd($password);
                 $user->setPassword($this->encoder->hashPassword($user,$password));
                 $user->setActive(1);
                 $em->persist($user);
@@ -88,6 +88,8 @@ class UserController extends AbstractController
             if ($isAjax) {
                 return $this->json( compact('statut', 'message', 'redirect'));
             } else {
+
+               // dd()
                 if ($statut == 1) {
                     return $this->redirect($redirect);
                 }
