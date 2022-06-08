@@ -48,7 +48,7 @@ class ClientController extends AbstractController
                 'Registre_commerce' => 'Registre_commerce',
                 'Boite_postal' => 'Boite_postal',
                 'Site_web' => 'Site_web',
-                'Téléphone' => 'Téléphone',
+                'Email' => 'Email',
             ],
             'critereTitre'=>'',
             'modal' => '',

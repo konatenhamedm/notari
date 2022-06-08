@@ -29,9 +29,27 @@ class Type
      */
     private $active;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Workflow::class, mappedBy="typeActe")
+     */
+    private $workflows;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Acte::class, mappedBy="typeActe")
+     */
+    private $actes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="typeActe")
+     */
+    private $dossiers;
+
     public function __construct()
     {
         $this->actes = new ArrayCollection();
+        $this->workflows = new ArrayCollection();
+        $this->dossiers = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -62,4 +80,95 @@ class Type
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Workflow>
+     */
+    public function getWorkflows(): Collection
+    {
+        return $this->workflows;
+    }
+
+    public function addWorkflow(Workflow $workflow): self
+    {
+        if (!$this->workflows->contains($workflow)) {
+            $this->workflows[] = $workflow;
+            $workflow->setTypeActe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkflow(Workflow $workflow): self
+    {
+        if ($this->workflows->removeElement($workflow)) {
+            // set the owning side to null (unless already changed)
+            if ($workflow->getTypeActe() === $this) {
+                $workflow->setTypeActe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Acte>
+     */
+    public function getActes(): Collection
+    {
+        return $this->actes;
+    }
+
+    public function addActe(Acte $acte): self
+    {
+        if (!$this->actes->contains($acte)) {
+            $this->actes[] = $acte;
+            $acte->setTypeActe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActe(Acte $acte): self
+    {
+        if ($this->actes->removeElement($acte)) {
+            // set the owning side to null (unless already changed)
+            if ($acte->getTypeActe() === $this) {
+                $acte->setTypeActe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Dossier>
+     */
+    public function getDossiers(): Collection
+    {
+        return $this->dossiers;
+    }
+
+    public function addDossier(Dossier $dossier): self
+    {
+        if (!$this->dossiers->contains($dossier)) {
+            $this->dossiers[] = $dossier;
+            $dossier->setTypeActe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDossier(Dossier $dossier): self
+    {
+        if ($this->dossiers->removeElement($dossier)) {
+            // set the owning side to null (unless already changed)
+            if ($dossier->getTypeActe() === $this) {
+                $dossier->setTypeActe(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -1,0 +1,19 @@
+{% macro document(document) %}
+
+    <div class="row">
+        <div class="col-md-3 ">
+            {{ form_row(document.libelle,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Titre'}}) }}
+        </div>
+        <div class="col-md-3 ">
+            {{ form_row(document.date,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Image'}}) }}
+        </div>
+        <div class="col-md-3 ">
+            {{ form_row(document.path,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'documents en pdf'}}) }}
+        </div>
+        <div class="col-md-1  supprimer">
+
+        </div>
+
+    </div>
+
+{% endmacro document %}

@@ -1,0 +1,22 @@
+{% macro piece(piece) %}
+
+    <div class="row">
+        <div class="col-md-3 ">
+            {{ form_row(piece.libelle,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Titre'}}) }}
+        </div>
+        <div class="col-md-3 ">
+            {{ form_row(piece.client,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Image'}}) }}
+        </div>
+        <div class="col-md-2 ">
+            {{ form_row(piece.dateTransmission,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Image'}}) }}
+        </div>
+        <div class="col-md-3 ">
+            {{ form_row(piece.path,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Image'}}) }}
+        </div>
+        <div class="col-md-1  supprimer">
+
+        </div>
+
+    </div>
+
+{% endmacro piece %}

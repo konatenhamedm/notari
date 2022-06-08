@@ -2,13 +2,13 @@
 	"use strict";
 	
 	// Toolbar extra buttons
-	var btnFinish = $('<button></button>').text('Finish')
+	var btnFinish = $('<button></button>').text('Finir')
 		.addClass('btn btn-primary')
 		.on('click', function(){ alert('Finish Clicked'); });
-	var btnCancel = $('<button></button>').text('Cancel')
-		.addClass('btn btn-secondary')
-		.on('click', function(){ $('#smartwizard-3').smartWizard("reset"); });
-
+	/*var btnCancel = $('<button></button>').text('Cancel')
+		.addClass('btn btn-secondary')*/
+	/*	.on('click', function(){ $('#smartwizard-3').smartWizard("reset"); });
+*/
 
 	// Smart Wizard
 	$('#smartwizard').smartWizard({
@@ -18,7 +18,7 @@
 			showStepURLhash: true,
 			toolbarSettings: {
 							  toolbarButtonPosition: 'end',
-							  toolbarExtraButtons: [btnFinish, btnCancel]
+							  toolbarExtraButtons: [btnFinish]
 							}
 	});
 		
@@ -29,7 +29,7 @@
 			transitionEffect:'fade',
 			showStepURLhash: false,
 			toolbarSettings: {
-							  toolbarExtraButtons: [btnFinish, btnCancel]
+							  toolbarExtraButtons: [btnFinish]
 							}
 	});
 			
@@ -40,7 +40,7 @@
 			transitionEffect:'fade',
 			showStepURLhash: false,
 			toolbarSettings: {
-							  toolbarExtraButtons: [btnFinish, btnCancel]
+							  toolbarExtraButtons: [btnFinish]
 							}
 	});
 			
@@ -51,7 +51,7 @@
 			transitionEffect:'fade',
 			showStepURLhash: false,
 			toolbarSettings: {
-							  toolbarExtraButtons: [btnFinish, btnCancel]
+							  toolbarExtraButtons: [btnFinish]
 							}
 	});
 	

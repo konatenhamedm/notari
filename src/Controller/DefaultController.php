@@ -14,7 +14,7 @@ class DefaultController extends AbstractController
 {
 
     /**
-     * @Route("/", name="app_florence", methods={"post", "get"})
+     * @Route("/florence", name="app_florence", methods={"post", "get"})
      */
     public function indexFlorence(ChambreRepository $repository): Response
     {

@@ -96,6 +96,9 @@ class ClientType extends AbstractType
             ->add('emailConjoint',EmailType::class,[
                 'required'=>false
             ])
+            ->add('emailEntreprise',EmailType::class,[
+                'required'=>false
+            ])
             ->add('prenom',TextType::class,[
                 'required'=>false
             ])

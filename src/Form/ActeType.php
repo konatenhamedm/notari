@@ -33,7 +33,7 @@ class ActeType extends AbstractType
             ])
             ->add('objet',TextType::class)
             ->add('numero',TextType::class)
-            ->add('fichiers', CollectionType::class, [
+            /*->add('fichiers', CollectionType::class, [
                 'entry_type' => FichierActeType::class,
                 'entry_options' => [
                     'label' => false
@@ -44,7 +44,7 @@ class ActeType extends AbstractType
                 'allow_delete' => true,
                 'prototype' => true,
 
-            ])
+            ])*/
             ->add('montant',MoneyType::class)
             ->add('detail',TextareaType::class,[
                 'attr' => ['rows' => '4']

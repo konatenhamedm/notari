@@ -26,8 +26,8 @@
             <i class="fe fe-file"></i>
         </a>
     {% endif %}
-    {% if action == "acteConstitution" %}
-        <a title="Suivi document" class="btn  btn-sm btn-dark" href="{{ path( action ~ '_archive',{'id':data.id}) }}" {% if modal=="modal" %} data-bs-toggle="modal" data-bs-target="#editUserModal" {% endif %}>
+    {% if action in ["dossierActeVente","dossierConstition"] %}
+        <a title="Suivi dossier" class="btn  btn-sm btn-dark" href="{{ path('details_edit',{'id':data.id}) }}" {% if modal=="modal" %} data-bs-toggle="modal" data-bs-target="#editUserModal" {% endif %}>
             <i class="fe fe-book"></i>
         </a>
     {% endif %}

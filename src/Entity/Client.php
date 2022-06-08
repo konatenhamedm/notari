@@ -315,6 +315,27 @@ class Client
     private $acteConstitutions;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity=Identification::class, mappedBy="vendeur")
+     */
+    private $vendeur;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Piece::class, mappedBy="client")
+     */
+    private $pieces;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Identification::class, mappedBy="acheteur")
+     */
+    private $acheteur;
+
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private $emailEntreprise;
+
+
     public function __construct()
     {
         $this->calendars = new ArrayCollection();
@@ -324,6 +345,9 @@ class Client
         $this->vendeurs = new ArrayCollection();
         $this->acheteurs = new ArrayCollection();
         $this->acteConstitutions = new ArrayCollection();
+        $this->vendeur = new ArrayCollection();
+        $this->pieces = new ArrayCollection();
+        $this->acheteur = new ArrayCollection();
     }
 
     public  function getNomPrenoms(){
@@ -1053,27 +1077,6 @@ class Client
         return $this->acheteurs;
     }
 
-    public function addAcheteur(Acte $acheteur): self
-    {
-        if (!$this->acheteurs->contains($acheteur)) {
-            $this->acheteurs[] = $acheteur;
-            $acheteur->setAcheteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAcheteur(Acte $acheteur): self
-    {
-        if ($this->acheteurs->removeElement($acheteur)) {
-            // set the owning side to null (unless already changed)
-            if ($acheteur->getAcheteur() === $this) {
-                $acheteur->setAcheteur(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, ActeConstitution>
@@ -1113,6 +1116,88 @@ class Client
 
                 return $this->getRaisonSocial();
             }
+        }
+
+
+
+        /**
+         * @return Collection<int, Identification>
+         */
+        public function getVendeur(): Collection
+        {
+            return $this->vendeur;
+        }
+
+        /**
+         * @return Collection<int, Piece>
+         */
+        public function getPieces(): Collection
+        {
+            return $this->pieces;
+        }
+
+        public function addPiece(Piece $piece): self
+        {
+            if (!$this->pieces->contains($piece)) {
+                $this->pieces[] = $piece;
+                $piece->setClient($this);
+            }
+
+            return $this;
+        }
+
+        public function removePiece(Piece $piece): self
+        {
+            if ($this->pieces->removeElement($piece)) {
+                // set the owning side to null (unless already changed)
+                if ($piece->getClient() === $this) {
+                    $piece->setClient(null);
+                }
+            }
+
+            return $this;
+        }
+
+        /**
+         * @return Collection<int, Identification>
+         */
+        public function getAcheteur(): Collection
+        {
+            return $this->acheteur;
+        }
+
+        public function addAcheteur(Identification $acheteur): self
+        {
+            if (!$this->acheteur->contains($acheteur)) {
+                $this->acheteur[] = $acheteur;
+                $acheteur->setAcheteur($this);
+            }
+
+            return $this;
+        }
+
+        public function removeAcheteur(Identification $acheteur): self
+        {
+            if ($this->acheteur->removeElement($acheteur)) {
+                // set the owning side to null (unless already changed)
+                if ($acheteur->getAcheteur() === $this) {
+                    $acheteur->setAcheteur(null);
+                }
+            }
+
+            return $this;
+        }
+
+        public function getEmailEntreprise(): ?string
+        {
+            return $this->emailEntreprise;
+        }
+
+        public function setEmailEntreprise(string $emailEntreprise): self
+        {
+            $this->emailEntreprise = $emailEntreprise;
+
+            return $this;
         }
 
 

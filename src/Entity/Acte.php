@@ -84,12 +84,28 @@ class Acte
      */
     private $acheteur;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ActeVenteWorkflow::class, mappedBy="acte")
+     */
+    private $acteVenteWorkflows;
+
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private $numeroClassification;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="actes")
+     */
+    private $typeActe;
+
 
 
     public function __construct()
     {
         $this->fichiers = new ArrayCollection();
         $this->archives = new ArrayCollection();
+        $this->acteVenteWorkflows = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -273,6 +289,60 @@ class Acte
     public function setAcheteur(?Client $acheteur): self
     {
         $this->acheteur = $acheteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ActeVenteWorkflow>
+     */
+    public function getActeVenteWorkflows(): Collection
+    {
+        return $this->acteVenteWorkflows;
+    }
+
+    public function addActeVenteWorkflow(ActeVenteWorkflow $acteVenteWorkflow): self
+    {
+        if (!$this->acteVenteWorkflows->contains($acteVenteWorkflow)) {
+            $this->acteVenteWorkflows[] = $acteVenteWorkflow;
+            $acteVenteWorkflow->setActe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActeVenteWorkflow(ActeVenteWorkflow $acteVenteWorkflow): self
+    {
+        if ($this->acteVenteWorkflows->removeElement($acteVenteWorkflow)) {
+            // set the owning side to null (unless already changed)
+            if ($acteVenteWorkflow->getActe() === $this) {
+                $acteVenteWorkflow->setActe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNumeroClassification(): ?string
+    {
+        return $this->numeroClassification;
+    }
+
+    public function setNumeroClassification(string $numeroClassification): self
+    {
+        $this->numeroClassification = $numeroClassification;
+
+        return $this;
+    }
+
+    public function getTypeActe(): ?Type
+    {
+        return $this->typeActe;
+    }
+
+    public function setTypeActe(?Type $typeActe): self
+    {
+        $this->typeActe = $typeActe;
 
         return $this;
     }

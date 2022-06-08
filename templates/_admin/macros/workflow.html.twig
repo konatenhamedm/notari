@@ -1,0 +1,23 @@
+{% macro image(image) %}
+{#{{ dump(image) }}#}
+    <div class="row">
+        <div class="col-md-3 ">
+            {{ form_row(image.numeroEtape,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Numéro étape'}}) }}
+        </div>
+        <div class="col-md-3 ">
+            {{ form_row(image.libelleEtape,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Libelle étape'}}) }}
+        </div>
+        <div class="col-md-2 ">
+            {{ form_row(image.NombreJours,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Nombre de jours'}}) }}
+        </div>
+        <div class="col-md-3 ">
+            {{ form_row(image.typeActe,{'attr':{'class':'form-control motif','id':'userinput16','placeholder':'Type acte'}}) }}
+        </div>
+
+        <div class="col-md-1  supprimer">
+
+        </div>
+
+    </div>
+
+{% endmacro image %}

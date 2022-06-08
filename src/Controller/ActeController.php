@@ -118,7 +118,7 @@ class ActeController extends AbstractController
         if ($form->isSubmitted()) {
             $statut = 1;
             $redirect = $this->generateUrl('acte');
-            $brochureFile = $form->get('fichiers')->getData();
+          //  $brochureFile = $form->get('fichiers')->getData();
 
         //    dd($brochureFile);
             if ($form->isValid()) {
@@ -128,13 +128,13 @@ class ActeController extends AbstractController
 
                  //   $format = $date.'-'.$nombre.' '.'ACTE';
 
-                foreach ($brochureFile as $image) {
+            /*    foreach ($brochureFile as $image) {
                     $file = new File($image->getPath());
                     $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
                     // $fileName = md5(uniqid()).'.'.$file->guessExtension();
                     $file->move($this->getParameter('images_directory'), $newFilename);
                     $image->setPath($newFilename);
-                }
+                }*/
 
 
                /* $acte
