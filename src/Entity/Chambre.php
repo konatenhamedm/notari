@@ -39,6 +39,11 @@ class Chambre
      */
     private $images;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $active;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -78,9 +83,14 @@ class Chambre
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image): self
     {
-        $this->image = $image;
+
+
+        if (!is_null($image)){
+            $this->image = $image;
+        }
+      //  $this->image = $image;
 
         return $this;
     }
@@ -111,6 +121,18 @@ class Chambre
                 $image->setChambre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActive(): ?string
+    {
+        return $this->active;
+    }
+
+    public function setActive(string $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

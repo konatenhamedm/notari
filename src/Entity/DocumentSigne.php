@@ -59,7 +59,7 @@ class DocumentSigne
         return $this->path;
     }
 
-    public function setPath(string $path): self
+    public function setPath($path): self
     {
 
         if (!is_null($path)){

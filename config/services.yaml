@@ -8,6 +8,9 @@ parameters:
          images_dir: '%kernel.project_dir%/public'
 services:
     # default configuration for services in *this* file
+    App\Services\FileUploader:
+        arguments:
+            $targetDirectory: '%images_directory%'
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
