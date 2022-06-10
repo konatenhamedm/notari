@@ -38,7 +38,16 @@ class IdentificationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    public function getLength($value){
+        return $this->createQueryBuilder("i")
+            ->select('count(i.id)')
+            ->innerJoin('i.dossier','d')
+            ->innerJoin('d.typeActe','t')
+            ->where('d.id=:id')
+            ->setParameter('id', $value)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 //    /**
 //     * @return Identification[] Returns an array of Identification objects
 //     */

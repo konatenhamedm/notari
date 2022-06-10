@@ -18,6 +18,14 @@ class DossierType extends AbstractType
     {
         $builder
             ->add('numeroOuverture')
+            ->add('dateCreation', DateType::Class, [
+                "label" => "Date création",
+                "required" => false,
+                "widget" => 'single_text',
+                "input_format" => 'Y-m-d',
+                "by_reference" => true,
+                "empty_data" => '',
+            ])
             ->add('documentSignes', CollectionType::class, [
                 'entry_type' => DocumentSigneType::class,
                 'entry_options' => [

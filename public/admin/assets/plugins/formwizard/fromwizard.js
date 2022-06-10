@@ -2,7 +2,9 @@
 	"use strict";
 	
 	// Toolbar extra buttons
-	var btnFinish = $('<button></button>').text('Finir')
+	var btnFinish1 = $('<button></button>').text('Finir')
+		.addClass('btn btn-secondary')
+	var btnFinish = $('<a href=""></a>').text('Finir')
 		.addClass('btn btn-primary')
 		.on('click', function(){ alert('Finish Clicked'); });
 	/*var btnCancel = $('<button></button>').text('Cancel')
@@ -18,7 +20,7 @@
 			showStepURLhash: true,
 			toolbarSettings: {
 							  toolbarButtonPosition: 'end',
-							  toolbarExtraButtons: [btnFinish]
+							  toolbarExtraButtons: []
 							}
 	});
 		
@@ -40,7 +42,7 @@
 			transitionEffect:'fade',
 			showStepURLhash: false,
 			toolbarSettings: {
-							  toolbarExtraButtons: [btnFinish]
+							  toolbarExtraButtons: [btnFinish1]
 							}
 	});
 			
@@ -51,7 +53,7 @@
 			transitionEffect:'fade',
 			showStepURLhash: false,
 			toolbarSettings: {
-							  toolbarExtraButtons: [btnFinish]
+							  toolbarExtraButtons: []
 							}
 	});
 	

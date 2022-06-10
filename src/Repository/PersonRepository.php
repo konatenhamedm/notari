@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Piece;
+use App\Entity\Person;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Piece>
+ * @extends ServiceEntityRepository<Person>
  *
- * @method Piece|null find($id, $lockMode = null, $lockVersion = null)
- * @method Piece|null findOneBy(array $criteria, array $orderBy = null)
- * @method Piece[]    findAll()
- * @method Piece[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Person|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Person|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Person[]    findAll()
+ * @method Person[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PieceRepository extends ServiceEntityRepository
+class PersonRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Piece::class);
+        parent::__construct($registry, Person::class);
     }
 
-    public function add(Piece $entity, bool $flush = false): void
+    public function add(Person $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class PieceRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Piece $entity, bool $flush = false): void
+    public function remove(Person $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -38,17 +38,9 @@ class PieceRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function getLength($value){
-        return $this->createQueryBuilder("p")
-            ->select('count(p.id)')
-            ->innerJoin('p.dossier','d')
-            ->where('d.id=:id')
-            ->setParameter('id', $value)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
+
 //    /**
-//     * @return Piece[] Returns an array of Piece objects
+//     * @return Person[] Returns an array of Person objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -62,7 +54,7 @@ class PieceRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Piece
+//    public function findOneBySomeField($value): ?Person
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

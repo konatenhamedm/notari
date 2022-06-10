@@ -24,8 +24,8 @@ class IdentificationType extends AbstractType
                         ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
-                'label' => "Acheteur",
-                'placeholder' => "Selectionner l'acheteur",
+                'label' => false,
+                'placeholder' => "Veillez selectionner une entité",
                 'choice_label' => function ($client) {
                     if ($client->getRaisonSocial() == "") {
                         return $client->getNom() . ' ' . $client->getPrenom();
@@ -46,7 +46,7 @@ class IdentificationType extends AbstractType
                         ->setParameter('val', 1)
                         ->orderBy('u.id', 'DESC');
                 },
-                'label' => 'Vendeur',
+                'label' => false,
                 'placeholder' => 'Selectionner le vendeur',
                 'choice_label' => function ($client) {
                     if ($client->getRaisonSocial() == "") {

@@ -20,7 +20,7 @@
                             <h3 class="card-title">Form Wizard</h3>
                         </div>#}
                     <div class="card-body">
-                        <div id="smartwizard-3">
+                        <div id="smartwizard-3" class="sw-main sw-theme-dots">
                             <ul>
                                 {% for entete in workflow %}
                                     <li><a href="#step-{{ entete.nbre }}">{{ entete.libelle }}</a></li>
@@ -29,37 +29,54 @@
                                 {% endfor %}
                             </ul>
                             <div>
-                               {# {% for entete in workflow %}#}
-                                    <div id="step-1" class="">
+                                {# {% for entete in workflow %}#}
+                                <div id="step-1" class="">
                                      <span class="col-lg-12 identification" id="identification"
                                            data-prototype="{{ identifie(form.identifications.vars.prototype)|e('html_attr') }}">
 
                                   <h4>Identification des clients</h4>
-                             {#   <div class="col-md-12">
-                                    <a href="#" class="btn btn-secondary add_groupe" style="margin-left: -20px" data-card-tool="remove"
-                                       data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Card">Ajouter un
+                                {% if identification_nombre < 0 %}
+                                    <div class="col-md-12">
+                                    <a href="#" class="btn btn-secondary add_identification" style="margin-left: -20px"
+                                       data-card-tool="remove"
+                                       data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Remove Card">Ajouter un
                                         fichier </a>
-                                </div>#}
-                                {% for row in form.identifications %}
-                                    <span class="container col-md-12">
+                                </div>
+                                {% endif %}
+                                         {% for row in form.identifications %}
+                                             <span class="container col-md-12">
                                         {{ identifie(row|e) }}
 
                                     </span>
-                                {% endfor %}
+                                         {% endfor %}
                      <input class="after" type="hidden"/>
                             </span>
+                                    {% if identification_nombre > 0 and dossier.etape == "Identification du client"%}
+                                        <div class="row">
+                                            <div class="col-md-4"><a class="btn btn-primary etape" style="" href="{{ path('valider',{'id': dossier.id }) }}"
+                                                >Finir</a></div>
+                                            <div class="col-md-8"></div>
+                                        </div>
+                                    {% endif %}
+                                </div>
 
+                                <div id="step-2" class=" ">
 
-                                    </div>
+                                    {% if  dossier.etape == "Identification du client" %}
 
-                                <div id="step-2" class="">
-                                     <span class="col-lg-12 groupe" id="groupe"
-                                           data-prototype="{{ piece(form.pieces.vars.prototype)|e('html_attr') }}">
+                                        <h2>Veillez s'il vous plaît terminer les/l étape(s) précédente(s)</h2>
+                                    {% endif %}
+                                    <div class="" {% if dossier.etape == "Identification du client" %} style="visibility: hidden;" {% endif %}>
+                                        <span class="col-lg-12 groupe" id="groupe"
+                                              data-prototype="{{ piece(form.pieces.vars.prototype)|e('html_attr') }}">
 
                                   <h4>LISTE DES PIECES </h4>
                                 <div class="col-md-12">
-                                    <a href="#" class="btn btn-secondary add_groupe" style="margin-left: -20px" data-card-tool="remove"
-                                       data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Card">Ajouter une
+                                    <a href="#" class="btn btn-secondary add_groupe" style="margin-left: -20px"
+                                       data-card-tool="remove"
+                                       data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Remove Card">Ajouter une
                                         pièce </a>
                                 </div>
                                 {% for row in form.pieces %}
@@ -71,18 +88,35 @@
                      <input class="after" type="hidden"/>
                             </span>
 
+                                        {% if piece_nombre == 2 and dossier.etape == "Recueil des pièces"%}
+                                            <div class="row">
+                                                <div class="col-md-4"><a class="btn btn-primary etape" style="" href="{{ path('valider2',{'id': dossier.id }) }}"
+                                                    >Finir</a></div>
+                                                <div class="col-md-8"></div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
 
                                 </div>
-                               {# {% endfor %}#}
+                                {# {% endfor %}#}
 
-                                <div id="step-3" class="">
-                                     <span class="col-lg-12 document" id="document"
-                                           data-prototype="{{ document(form.documentSignes.vars.prototype)|e('html_attr') }}">
+                                <div id="step-3"
+                                     class="" >
+                                    {% if dossier.etape == "Identification du client" or  (dossier.etape == "Recueil des pièces" )  %}
+
+                                        <h2>Veillez s'il vous plaît terminer les/l étape(s) précédente(s)</h2>
+                                    {% endif %}
+
+                                    <div {% if (dossier.etape == "Identification du client") or  (dossier.etape == "Recueil des pièces" ) %} style="visibility: hidden;" {% endif %}>
+                                         <span class="col-lg-12 document" id="document"
+                                               data-prototype="{{ document(form.documentSignes.vars.prototype)|e('html_attr') }}">
 
                                   <h4>Document signés</h4>
                                 <div class="col-md-12">
-                                    <a href="#" class="btn btn-secondary add_document" style="margin-left: -20px" data-card-tool="remove"
-                                       data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Card">Ajouter une
+                                    <a href="#" class="btn btn-secondary add_document" style="margin-left: -20px"
+                                       data-card-tool="remove"
+                                       data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Remove Card">Ajouter une
                                         document </a>
                                 </div>
                                 {% for row in form.documentSignes %}
@@ -94,10 +128,18 @@
                      <input class="after" type="hidden"/>
                             </span>
 
-
+                                        {% if document_nombre > 0 and dossier.etape == "Signature"%}
+                                            <div class="row">
+                                                <div class="col-md-4"><a class="btn btn-primary etape" style="" href="{{ path('valider3',{'id': dossier.id }) }}"
+                                                    >Finir</a></div>
+                                                <div class="col-md-8"></div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
 
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -108,15 +150,16 @@
 
             <div class="row">
                 <div class="form-group col-md-6 ">
+                    <label class="sr-onl" for="userinput1">Date création</label>
+                    {{ form_widget(form.dateCreation,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Date création','required':'required' }}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+                <div class="form-group col-md-6 ">
                     <label class="sr-onl" for="userinput1">Numéro ouverture</label>
-                    {{ form_widget(form.numeroOuverture,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Date','required':'required' }}) }}
+                    {{ form_widget(form.numeroOuverture,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro ouverture','required':'required' }}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="sr-onl" for="userinput1">Numéro classification</label>
-                    {{ form_widget(form.numeroClassification,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro du dossier' }}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
+
             </div>
             <div class="row">
                 <div class="form-group col-md-12 ">
@@ -129,7 +172,12 @@
             <div class="row">
                 <div class="form-group col-md-12">
                     <label class="sr-onl" for="userinput1">Date classification</label>
-                    {{ form_widget(form.dateClassification,{'attr':{'class':'form-control border-primary ','id':'userinput1','placeholder':'Vendeur','required':'required'}}) }}
+                    {{ form_widget(form.dateClassification,{'attr':{'class':'form-control border-primary ','id':'userinput1','placeholder':'Date classification'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="sr-onl" for="userinput1">Numéro classification</label>
+                    {{ form_widget(form.numeroClassification,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro classification' }}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
                 {#<div class="form-group col-md-6">
@@ -153,14 +201,13 @@
 
 {% endblock %}
 {#{% include 'admin/macros/fichier.html.twig'  %}#}
-
-
 {% block javascripts %}
 
     <script src="{{ asset('admin/admin/js/jquery3.1.js') }}"></script>
     <script src="{{ asset('admin/admin/js/groupe.js') }}"></script>
     <script src="{{ asset('admin/admin/js/identification.js') }}"></script>
     <script src="{{ asset('admin/admin/js/document.js') }}"></script>
+
     <!-- INTERNAL File-Uploads Js-->
     <script src="{{ asset('admin/assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
     <script src="{{ asset('admin/assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
@@ -181,10 +228,16 @@
 
     <script src="{{ asset('admin/assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/form-wizard.js') }}"></script>
-
+    <script src="{{ asset('admin/admin/js/validation.js') }}"></script>
     <script>
         $('.contenu').hide()
         $('#dossier_identifications_1_acheteur').closest('span').find('row').hide()
+        // $('.add_groupe').click()
+        $('.add_groupe').click(function () {
+            $(this).hide()
+        })
+
+
     </script>
 
 {% endblock %}

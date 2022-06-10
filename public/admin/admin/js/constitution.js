@@ -12,7 +12,11 @@ $(document).ready(function () {
         })
         addForm();
         $('.add_identification').hide()
-      /*  $('.vendeur').hide()*/
+        $('.vendeur').hide()
+        document.getElementById('userinput1').innerHTML
+            = 'Client';
+        document.getElementsById("dossier_identifications_0_acheteur")[0].placeholder = 'CPF';
+        //$('#userinput1').textContent = ""
         /*     $addTagButton.click(function (e) {
 
                  //alert("jhghghg")

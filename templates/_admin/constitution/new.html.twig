@@ -15,15 +15,16 @@
 
             <div class="row">
                 <div class="form-group col-md-6 ">
+                    <label class="sr-onl" for="userinput1">Date création</label>
+                    {{ form_widget(form.dateCreation,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Date création','required':'required' }}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+                <div class="form-group col-md-6 ">
                     <label class="sr-onl" for="userinput1">Numéro ouverture</label>
-                    {{ form_widget(form.numeroOuverture,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Date','required':'required' }}) }}
+                    {{ form_widget(form.numeroOuverture,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro ouverture','required':'required' }}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="sr-onl" for="userinput1">Numéro classification</label>
-                    {{ form_widget(form.numeroClassification,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro du dossier' }}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
+
             </div>
             <div class="row">
                 <div class="form-group col-md-12 ">
@@ -34,9 +35,14 @@
 
             </div>
             <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label class="sr-onl" for="userinput1">Date classification</label>
-                    {{ form_widget(form.dateClassification,{'attr':{'class':'form-control border-primary ','id':'userinput1','placeholder':'Vendeur','required':'required'}}) }}
+                    {{ form_widget(form.dateClassification,{'attr':{'class':'form-control border-primary ','id':'userinput1','placeholder':'Date classification'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="sr-onl" for="userinput1">Numéro classification</label>
+                    {{ form_widget(form.numeroClassification,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numéro classification' }}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
                 {#<div class="form-group col-md-6">
@@ -60,10 +66,10 @@
 {% endblock %}
 {#{% include 'admin/macros/fichier.html.twig'  %}#}
 
-{#
+
 {% block javascripts %}
 
     <script src="{{ asset('admin/admin/js/jquery3.1.js') }}"></script>
     <script src="{{ asset('admin/admin/js/groupe.js') }}"></script>
 
-{% endblock %}#}
+{% endblock %}

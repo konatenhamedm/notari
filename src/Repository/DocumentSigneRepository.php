@@ -38,7 +38,15 @@ class DocumentSigneRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    public function getLength($value){
+        return $this->createQueryBuilder("p")
+            ->select('count(p.id)')
+            ->innerJoin('p.dossier','d')
+            ->where('d.id=:id')
+            ->setParameter('id', $value)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 //    /**
 //     * @return DocumentSigne[] Returns an array of DocumentSigne objects
 //     */

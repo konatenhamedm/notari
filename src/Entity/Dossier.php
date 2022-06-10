@@ -81,6 +81,12 @@ class Dossier
      */
     private $documentSignes;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $etape;
+
+
     public function __construct()
     {
         $this->dossierWorkflows = new ArrayCollection();
@@ -314,4 +320,17 @@ class Dossier
 
         return $this;
     }
+
+    public function getEtape(): ?string
+    {
+        return $this->etape;
+    }
+
+    public function setEtape(string $etape): self
+    {
+        $this->etape = $etape;
+
+        return $this;
+    }
+
 }

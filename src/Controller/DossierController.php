@@ -7,9 +7,12 @@ use App\Entity\Dossier;
 use App\Entity\DossierWorkflow;
 use App\Entity\Identification;
 use App\Form\DossierType;
+use App\Repository\DocumentSigneRepository;
 use App\Repository\DossierRepository;
 use App\Repository\CourierArriveRepository;
 use App\Repository\DossierWorkflowRepository;
+use App\Repository\IdentificationRepository;
+use App\Repository\PieceRepository;
 use App\Repository\TypeRepository;
 use App\Repository\WorkflowRepository;
 use App\Services\UploaderHelper;
@@ -35,7 +38,7 @@ class DossierController extends AbstractController
     {
 
         $pagination = $repository->getListe(0,'Acte de vente');
-       // dd($pagination);
+        //dd($pagination);
         $finalise = $repository->getListe(1,'Acte de vente');
         //dd($pagination);
         return $this->render('_admin/dossier/index.html.twig', [
@@ -45,7 +48,7 @@ class DossierController extends AbstractController
                 'numero_ouverture' => 'numero_ouverture',
                 'Date_creation' => 'Date_creation',
                 'Objet' => 'Objet',
-                'Type_acte' => 'Type_acte',
+                'Etape' => 'Etape',
 
             ],
 
@@ -89,8 +92,11 @@ class DossierController extends AbstractController
     }
 
     /**
-     * @Route("/dossier/{id}/details", name="details_edit", methods={"GET","POST"})
+     * @Route("/dossierActeVente/{id}/details", name="dossierActeVente_details", methods={"GET","POST"})
      * @param DossierWorkflowRepository $dossierWorkflowRepository
+     * @param PieceRepository $pieceRepository
+     * @param DocumentSigneRepository $documentSigneRepository
+     * @param IdentificationRepository $identificationRepository
      * @param Request $request
      * @param Dossier $dossier
      * @param EntityManagerInterface $em
@@ -98,12 +104,12 @@ class DossierController extends AbstractController
      * @param DossierRepository $repository
      * @return Response
      */
-    public function details(DossierWorkflowRepository $dossierWorkflowRepository,Request $request,Dossier $dossier, EntityManagerInterface $em,$id,DossierRepository $repository): Response
+    public function details(DossierWorkflowRepository $dossierWorkflowRepository,PieceRepository $pieceRepository,DocumentSigneRepository $documentSigneRepository, IdentificationRepository $identificationRepository,Request $request,Dossier $dossier, EntityManagerInterface $em,$id,DossierRepository $repository): Response
     {
 
         $form = $this->createForm(DossierType::class, $dossier, [
             'method' => 'POST',
-            'action' => $this->generateUrl('details_edit', [
+            'action' => $this->generateUrl('dossierActeVente_details', [
                 'id' => $dossier->getId(),
             ])
         ]);
@@ -120,20 +126,28 @@ class DossierController extends AbstractController
             if ($form->isValid()) {
 
                 foreach ($brochureFile as $image) {
-                    $file = new File($image->getPath());
-                    $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                    // $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move($this->getParameter('images_directory'), $newFilename);
-                    $image->setPath($newFilename);
+                    if (str_contains($image->getPath(),'.tmp')){
+                        $file = new File($image->getPath());
+                        $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
+                        // $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                        $file->move($this->getParameter('images_directory'), $newFilename);
+                        $image->setPath($newFilename);
+
+                    }
                 }
 
                 foreach ($brochureFile2 as $image) {
-                    $file = new File($image->getPath());
-                    $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                    // $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move($this->getParameter('images_directory'), $newFilename);
-                    $image->setPath($newFilename);
+                    if (str_contains($image->getPath(),'.tmp')){
+                        $file = new File($image->getPath());
+                        $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
+                        // $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                        $file->move($this->getParameter('images_directory'), $newFilename);
+                        $image->setPath($newFilename);
+
+                    }
                 }
+
+
                 $em->persist($dossier);
                 $em->flush();
 
@@ -157,6 +171,9 @@ class DossierController extends AbstractController
             'workflow'=>$dossierWorkflowRepository->getListe($dossier->getId()),
             'dossier' => $dossier,
             'form' => $form->createView(),
+            'identification_nombre' =>$identificationRepository->getLength($dossier->getId()),
+            'piece_nombre' =>$pieceRepository->getLength($dossier->getId()),
+            'document_nombre' =>$documentSigneRepository->getLength($dossier->getId()),
         ]);
     }
 
@@ -212,7 +229,8 @@ class DossierController extends AbstractController
                 $dossier->setActive(1);
                  $dossier->setEtat('0');
                  $dossier->setTypeActe($acteVente);
-                $dossier->setDateCreation(new \DateTime('now'));
+                 $dossier->setEtape('Identification du client');
+               //$dossier->setDateCreation(new \DateTime('now'));
                 $em->persist($dossier);
                 $em->flush();
 
@@ -351,6 +369,70 @@ class DossierController extends AbstractController
     }
 
 
+    /**
+     * @Route("/dossier/{id}/valider", name="valider", methods={"GET"})
+     * @param $id
+     * @param Dossier $parent
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function valider($id,Dossier $parent, EntityManagerInterface $entityManager): Response
+    {
+
+        $parent->setEtape('Recueil des pièces');
+        $entityManager->persist($parent);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('dossierActeVente');
+        /*return $this->json([
+            'code' => 200,
+            'message' => 'ça marche bien',
+        ], 200);*/
+
+    }
+
+    /**
+     * @Route("/dossier/{id}/valider2", name="valider2", methods={"GET"})
+     * @param $id
+     * @param Dossier $parent
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function valider2($id,Dossier $parent, EntityManagerInterface $entityManager): Response
+    {
+        $parent->setEtape('Signature');
+        $entityManager->persist($parent);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('dossierActeVente');
+        /*return $this->json([
+            'code' => 200,
+            'message' => 'ça marche bien',
+        ], 200);*/
+
+    }
+
+    /**
+     * @Route("/dossier/{id}/valider3", name="valider3", methods={"GET"})
+     * @param $id
+     * @param Dossier $parent
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function valider3($id,Dossier $parent, EntityManagerInterface $entityManager): Response
+    {
+
+        $parent->setEtape('Enregistrement');
+        $entityManager->persist($parent);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('dossierActeVente');
+        /*return $this->json([
+            'code' => 200,
+            'message' => 'ça marche bien',
+        ], 200);*/
+
+    }
 
     /**
      * @Route("/dossier/{id}/active", name="dossierActeVente_active", methods={"GET"})

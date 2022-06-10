@@ -33,7 +33,10 @@ $(document).ready(function () {
 
         var $card = $('<span class="container col-md-12"></span>')
         /*  var $cardbody = $('<div class="row"></div>').append(newForm);*/
-
+        $card.parents('.groupe').find('.numero').value = '1';
+       // $card.parents('.groupe').find('.numero').val(11);
+        //document.getElement(".numero").value += '1'
+console.log($card.closest('.ligne').find('.numero'))
         $card.append(newForm);
 
         addRemoveButton($card);
