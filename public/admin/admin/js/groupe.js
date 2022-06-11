@@ -3,6 +3,7 @@ $(document).ready(function () {
     var $collectionHolder;
     // setup an "add a tag" link
     var $addTagButton = $('.add_groupe');
+    var $numero = $('.numero');
 
     /*var $after = $('tr');*/
     /*var $newLinkLi = $('<li></li>').append($addTagButton);*/
@@ -33,10 +34,11 @@ $(document).ready(function () {
 
         var $card = $('<span class="container col-md-12"></span>')
         /*  var $cardbody = $('<div class="row"></div>').append(newForm);*/
-        $card.parents('.groupe').find('.numero').value = '1';
-       // $card.parents('.groupe').find('.numero').val(11);
+      //  $card.parents('.groupe').find('.numero').value = '1';
+       $card.closest('.container').find('.numero').val(11);
+        $numero.val(11)
         //document.getElement(".numero").value += '1'
-console.log($card.closest('.ligne').find('.numero'))
+console.log($card.closest('.container').find('.numero'))
         $card.append(newForm);
 
         addRemoveButton($card);
