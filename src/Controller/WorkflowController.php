@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\GestionWorkflowType;
+use App\Repository\TypeRepository;
 use App\Repository\WorkflowRepository;
 use App\Entity\GestionWorkflow;
 use Doctrine\ORM\EntityManagerInterface;
@@ -47,9 +48,10 @@ class WorkflowController extends AbstractController
      * @Route("/workflow/new", name="workflow_new", methods={"GET","POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
+     * @param TypeRepository $repository
      * @return Response
      */
-    public function new(Request $request, EntityManagerInterface  $em): Response
+    public function new(Request $request, EntityManagerInterface  $em,TypeRepository $repository): Response
     {
         $workflow = new GestionWorkflow();
         $form = $this->createForm(GestionWorkflowType::class,$workflow, [
@@ -64,8 +66,16 @@ class WorkflowController extends AbstractController
         {
             $response = [];
             $redirect = $this->generateUrl('workflow');
+            $datas= $form->get('workflow')->getData();
+
+                $typeActe = $repository->find($request->get('type'));
+
 
            if($form->isValid()){
+
+               foreach ($datas as $data){
+                    $data->setTypeActe($typeActe);
+               }
                $workflow->setActive(1);
                $em->persist($workflow);
                $em->flush();
@@ -88,6 +98,7 @@ class WorkflowController extends AbstractController
             'workflow' => $workflow,
             'form' => $form->createView(),
             'titre' => 'Worflow',
+            'type' => $repository->findAll(),
         ]);
     }
 
@@ -96,9 +107,10 @@ class WorkflowController extends AbstractController
      * @param Request $request
      * @param GestionWorkflow $workflow
      * @param EntityManagerInterface $em
+     * @param TypeRepository $repository
      * @return Response
      */
-    public function edit(Request $request,GestionWorkflow $workflow, EntityManagerInterface  $em): Response
+    public function edit(Request $request,GestionWorkflow $workflow, EntityManagerInterface  $em,TypeRepository $repository): Response
     {
 
         $form = $this->createForm(GestionWorkflowType::class,$workflow, [
@@ -139,6 +151,7 @@ class WorkflowController extends AbstractController
         return $this->render('_admin/workflow/edit.html.twig', [
             'workflow' => $workflow,
             'form' => $form->createView(),
+            'type'=>$repository->findAll(),
             'titre' => 'Worflow',
         ]);
     }
@@ -148,7 +161,7 @@ class WorkflowController extends AbstractController
      * @param GestionWorkflow $workflow
      * @return Response
      */
-    public function show(GestionWorkflow $workflow): Response
+    public function show(GestionWorkflow $workflow,TypeRepository $repository): Response
     {
         $form = $this->createForm(GestionWorkflowType::class,$workflow, [
             'method' => 'POST',
@@ -160,6 +173,7 @@ class WorkflowController extends AbstractController
         return $this->render('_admin/workflow/voir.html.twig', [
             'workflow' => $workflow,
             'titre' => 'Worflow',
+            'type' => $repository->findAll(),
             'form' => $form->createView(),
         ]);
     }

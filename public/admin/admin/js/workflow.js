@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     /*var $after = $('tr');*/
     /*var $newLinkLi = $('<li></li>').append($addTagButton);*/
-/*    addForm();*/
+    /*    addForm();*/
     $(document).ready(function () {
         $collectionHolder = $('#groupe');
         /*$collectionHolder.append($addTagButton);*/
@@ -20,20 +20,20 @@ $(document).ready(function () {
             //alert("jhghghg")
             e.preventDefault();
             addForm();
-           /* refresh();*/
+            refresh();
             // $('select').select2();
         })
 
     })
 
-/*    function refresh() {
+    function refresh() {
         let index = 0
         $('.ligne').each(function () {
             index++;
             $(this).attr('data-numberKey', index)
             $(this).find('.numero:first').val(index);
         })
-    }*/
+    }
 
     function addForm() {
         var prototype = $collectionHolder.data('prototype');
@@ -62,13 +62,13 @@ $(document).ready(function () {
 
             $(e.target).parents('.container').slideUp(1000, function () {
                 $(this).remove();
-               /* refresh();*/
+                refresh();
             });
 
         })
 
         $card.find(".supprimer").append($removeButton);
     }
-   // $card.find(".supprimer").append($removeButton);
+    // $card.find(".supprimer").append($removeButton);
 
 });

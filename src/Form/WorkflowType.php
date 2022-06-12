@@ -27,7 +27,7 @@ class WorkflowType extends AbstractType
             ->add('NombreJours',IntegerType::class,[
                 'label' => false,
             ])
-            ->add('typeActe',EntityType::class, [
+           /* ->add('typeActe',EntityType::class, [
                 'required' => true,
                 'class' => Type::class,
                 'query_builder' => function (EntityRepository $er) {
@@ -39,7 +39,7 @@ class WorkflowType extends AbstractType
                 'label' => false,
                 'choice_label' => 'titre',
 
-            ])
+            ])*/
            /* ->add('gestionWorkflow')*/
         ;
     }

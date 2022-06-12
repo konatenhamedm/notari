@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Classe\SearchTypeActe;
+use App\Entity\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,9 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class SearchTypeType extends AbstractType
 {
 
-    private $village;
-    private $array = [];
-    private $array2 = [];
 
     public function __construct()
     {
@@ -33,10 +31,10 @@ class SearchTypeType extends AbstractType
     {
         $builder
 
-          /*  ->add('type', EntityType::class, [
+            ->add('type', EntityType::class, [
                 // looks for choices from this entity
                 'label'=>false,
-                'class' => TypeActe::class,
+                'class' => Type::class,
 
                 // uses the User.username property as the visible option string
                 'choice_label' => 'titre',
@@ -45,7 +43,7 @@ class SearchTypeType extends AbstractType
                   'multiple' => true,
                  'expanded' => false,
                  'attr' => ['class' => 'custom-select select2 border-primary'],
-            ])*/
+            ])
         ;
 
     }

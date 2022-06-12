@@ -3,7 +3,7 @@ namespace App\Classe;
 class  SearchTypeActe {
 
     /*
-     * @var TypeActe[]
+     * @var Type[]
      */
     public $type=[];
 
