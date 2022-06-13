@@ -7,11 +7,11 @@
     {% set new = menu.getRoute %}
    {# {{ dump(new) }}#}
     <!-- PAGE-HEADER -->
-    <div class="page-header">
+    <div class="page-header" style="margin-top:-0.1rem">
         <h1 class="page-title">{{ "Workflow" |capitalize }}</h1>
         <div>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('workflow') }}">LISTE DES TYPES ACTES</a></li>{#
+                <li class="breadcrumb-item"><a href="{{ path('workflow') }}">LISTE DES WORKFLOWS</a></li>{#
                 <li class="breadcrumb-item active" aria-current="page">{{ "NOUVEAU CLIENT" | capitalize }}</li>#}
             </ol>
         </div>
@@ -19,7 +19,7 @@
     </div>
     <!-- PAGE-HEADER END -->
     <!-- Row -->
-    <div class="row row-sm">
+    <div class="row row-sm" style="margin-top:-1rem">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
@@ -47,16 +47,13 @@
 
                                 <tr>
                                     <td >
-                                        {{ data.numeroEtape }}
+                                        {{ data.titre }}
                                     </td>
                                     <td >
-                                        {{ data.libelleEtape }}
+                                        {{ data.type.titre }}
                                     </td>
-                                    <td >
-                                        {{ data.nombreJours }}
-                                    </td>
-                                    <td >
-                                        {{ data.typeActe.titre }}
+                                    <td width="30" style="text-align: center">
+                                        {{ data.total }}
                                     </td>
 
                                     {% include '_admin/_tableau/action.html.twig' with {'module':new ,'data':data }%}

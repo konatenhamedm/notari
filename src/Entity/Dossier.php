@@ -25,7 +25,7 @@ class Dossier
     private $numeroOuverture;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $numeroClassification;
 
@@ -35,7 +35,7 @@ class Dossier
     private $dateCreation;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",nullable=true)
      */
     private $dateClassification;
 
@@ -52,7 +52,7 @@ class Dossier
     private $etat;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $objet;
 
@@ -85,6 +85,11 @@ class Dossier
      * @ORM\Column(type="string", length=255)
      */
     private $etape;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
 
 
     public function __construct()
@@ -329,6 +334,18 @@ class Dossier
     public function setEtape(string $etape): self
     {
         $this->etape = $etape;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

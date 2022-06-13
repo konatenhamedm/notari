@@ -35,7 +35,7 @@ class TypeClientController extends AbstractController
             'tableau'=>['titre'=>'titre'],
             'modal' => 'modal',
 
-            'titre' => 'Liste des types clients',
+            'titre' => 'Liste des types de clients',
 
         ]);
     }

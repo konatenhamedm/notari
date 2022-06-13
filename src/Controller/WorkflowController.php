@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\GestionWorkflowType;
+use App\Repository\GestionWorkflowRepository;
 use App\Repository\TypeRepository;
 use App\Repository\WorkflowRepository;
 use App\Entity\GestionWorkflow;
@@ -21,26 +22,26 @@ class WorkflowController extends AbstractController
 {
     /**
      * @Route("/workflow", name="workflow")
-     * @param WorkflowRepository $repository
+     * @param GestionWorkflowRepository $repository
      * @return Response
      */
-    public function index(WorkflowRepository $repository): Response
+    public function index(GestionWorkflowRepository $repository): Response
     {
 
-        $pagination = $repository->findBy(['active'=>1]);
+        $pagination = $repository->findBy(['active' => 1]);
 //dd($pagination);
         return $this->render('_admin/workflow/index.html.twig', [
-           'pagination'=>$pagination,
-            'tableau'=>[
-                'numero_etape'=>'numero_etape',
-                'libelle_etape'=>'libelle_etape',
-                'nombre_jour'=>'nombre_jour',
-                'type_acte'=>'type_acte',
+            'pagination' => $pagination,
+            'tableau' => [
+                'titre' => 'titre',
+                'type_acte' => 'type_acte',
+                'nombre_total_jour' => 'nombre_total_jour',
+
 
             ],
             'modal' => 'modal',
 
-            'titre' => 'Liste des workflow',
+            'titre' => 'Liste des workflows',
         ]);
     }
 
@@ -51,10 +52,10 @@ class WorkflowController extends AbstractController
      * @param TypeRepository $repository
      * @return Response
      */
-    public function new(Request $request, EntityManagerInterface  $em,TypeRepository $repository): Response
+    public function new(Request $request, EntityManagerInterface $em, TypeRepository $repository): Response
     {
         $workflow = new GestionWorkflow();
-        $form = $this->createForm(GestionWorkflowType::class,$workflow, [
+        $form = $this->createForm(GestionWorkflowType::class, $workflow, [
             'method' => 'POST',
             'action' => $this->generateUrl('workflow_new')
         ]);
@@ -62,31 +63,33 @@ class WorkflowController extends AbstractController
 
         $isAjax = $request->isXmlHttpRequest();
 
-        if($form->isSubmitted())
-        {
+        if ($form->isSubmitted()) {
             $response = [];
             $redirect = $this->generateUrl('workflow');
-            $datas= $form->get('workflow')->getData();
+            $datas = $form->get('workflow')->getData();
 
-                $typeActe = $repository->find($request->get('type'));
+            $typeActe = $repository->find($request->get('type'));
+            $total =0;
 
+            if ($form->isValid()) {
 
-           if($form->isValid()){
-
-               foreach ($datas as $data){
+                foreach ($datas as $data) {
                     $data->setTypeActe($typeActe);
-               }
-               $workflow->setActive(1);
-               $em->persist($workflow);
-               $em->flush();
+                    $total = $total + $data->getNombreJours();
+                }
+                $workflow->setActive(1);
+                $workflow->setTotal($total);
+                $workflow->setType($typeActe);
+                $em->persist($workflow);
+                $em->flush();
 
-               $message       = 'Opération effectuée avec succès';
-               $statut = 1;
-               $this->addFlash('success', $message);
+                $message = 'Opération effectuée avec succès';
+                $statut = 1;
+                $this->addFlash('success', $message);
 
-           }
+            }
             if ($isAjax) {
-                return $this->json( compact('statut', 'message', 'redirect'));
+                return $this->json(compact('statut', 'message', 'redirect'));
             } else {
                 if ($statut == 1) {
                     return $this->redirect($redirect);
@@ -110,37 +113,46 @@ class WorkflowController extends AbstractController
      * @param TypeRepository $repository
      * @return Response
      */
-    public function edit(Request $request,GestionWorkflow $workflow, EntityManagerInterface  $em,TypeRepository $repository): Response
+    public function edit(Request $request, GestionWorkflow $workflow, EntityManagerInterface $em, TypeRepository $repository): Response
     {
 
-        $form = $this->createForm(GestionWorkflowType::class,$workflow, [
+        $form = $this->createForm(GestionWorkflowType::class, $workflow, [
             'method' => 'POST',
-            'action' => $this->generateUrl('workflow_edit',[
-                'id'=>$workflow->getId(),
+            'action' => $this->generateUrl('workflow_edit', [
+                'id' => $workflow->getId(),
             ])
         ]);
         $form->handleRequest($request);
 
         $isAjax = $request->isXmlHttpRequest();
 
-        if($form->isSubmitted())
-        {
-
+        if ($form->isSubmitted()) {
             $response = [];
             $redirect = $this->generateUrl('workflow');
+            $datas = $form->get('workflow')->getData();
 
-            if($form->isValid()){
+            $typeActe = $repository->find($request->get('type'));
+            $total =0;
+
+            if ($form->isValid()) {
+
+                foreach ($datas as $data) {
+                    $data->setTypeActe($typeActe);
+                    $total = $total + $data->getNombreJours();
+                }
+                $workflow->setActive(1);
+                $workflow->setTotal($total);
+                $workflow->setType($typeActe);
                 $em->persist($workflow);
                 $em->flush();
 
-                $message       = 'Opération effectuée avec succès';
+                $message = 'Opération effectuée avec succès';
                 $statut = 1;
                 $this->addFlash('success', $message);
 
             }
-
             if ($isAjax) {
-                return $this->json( compact('statut', 'message', 'redirect'));
+                return $this->json(compact('statut', 'message', 'redirect'));
             } else {
                 if ($statut == 1) {
                     return $this->redirect($redirect);
@@ -151,7 +163,7 @@ class WorkflowController extends AbstractController
         return $this->render('_admin/workflow/edit.html.twig', [
             'workflow' => $workflow,
             'form' => $form->createView(),
-            'type'=>$repository->findAll(),
+            'type' => $repository->findAll(),
             'titre' => 'Worflow',
         ]);
     }
@@ -161,12 +173,12 @@ class WorkflowController extends AbstractController
      * @param GestionWorkflow $workflow
      * @return Response
      */
-    public function show(GestionWorkflow $workflow,TypeRepository $repository): Response
+    public function show(GestionWorkflow $workflow, TypeRepository $repository): Response
     {
-        $form = $this->createForm(GestionWorkflowType::class,$workflow, [
+        $form = $this->createForm(GestionWorkflowType::class, $workflow, [
             'method' => 'POST',
-            'action' => $this->generateUrl('workflow_show',[
-                'id'=>$workflow->getId(),
+            'action' => $this->generateUrl('workflow_show', [
+                'id' => $workflow->getId(),
             ])
         ]);
 
@@ -185,16 +197,15 @@ class WorkflowController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function active($id,GestionWorkflow $workflow, EntityManagerInterface $entityManager): Response
+    public function active($id, GestionWorkflow $workflow, EntityManagerInterface $entityManager): Response
     {
 
 
-
-        if ($workflow->getActive() == 1){
+        if ($workflow->getActive() == 1) {
 
             $workflow->setActive(0);
 
-        }else{
+        } else {
 
             $workflow->setActive(1);
 
@@ -203,10 +214,10 @@ class WorkflowController extends AbstractController
         $entityManager->persist($workflow);
         $entityManager->flush();
         return $this->json([
-            'code'=>200,
-            'message'=>'ça marche bien',
-            'active'=>$workflow->getActive(),
-        ],200);
+            'code' => 200,
+            'message' => 'ça marche bien',
+            'active' => $workflow->getActive(),
+        ], 200);
 
 
     }
@@ -219,7 +230,7 @@ class WorkflowController extends AbstractController
      * @param GestionWorkflow $workflow
      * @return Response
      */
-    public function delete(Request $request, EntityManagerInterface $em,GestionWorkflow $workflow): Response
+    public function delete(Request $request, EntityManagerInterface $em, GestionWorkflow $workflow): Response
     {
 
 
@@ -227,7 +238,7 @@ class WorkflowController extends AbstractController
             ->setAction(
                 $this->generateUrl(
                     'workflow_delete'
-                    ,   [
+                    , [
                         'id' => $workflow->getId()
                     ]
                 )
@@ -246,8 +257,8 @@ class WorkflowController extends AbstractController
             $message = 'Opération effectuée avec succès';
 
             $response = [
-                'statut'   => 1,
-                'message'  => $message,
+                'statut' => 1,
+                'message' => $message,
                 'redirect' => $redirect,
             ];
 
@@ -258,7 +269,6 @@ class WorkflowController extends AbstractController
             } else {
                 return $this->json($response);
             }
-
 
 
         }

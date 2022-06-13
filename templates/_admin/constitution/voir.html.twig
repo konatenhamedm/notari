@@ -35,6 +35,14 @@
 
             </div>
             <div class="row">
+                <div class="form-group col-md-12 ">
+                    <label class="sr-onl" for="userinput1">Description</label>
+                    {{ form_widget(form.description,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Description'}}) }}
+
+                </div>
+
+            </div>
+            <div class="row">
                 <div class="form-group col-md-6">
                     <label class="sr-onl" for="userinput1">Date classification</label>
                     {{ form_widget(form.dateClassification,{'attr':{'class':'form-control border-primary ','id':'userinput1','placeholder':'Date classification'}}) }}

@@ -29,6 +29,21 @@ class GestionWorkflow
      */
     private $active;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titre;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $total;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="gestionWorkflows")
+     */
+    private $type;
+
     public function __construct()
     {
         $this->workflow = new ArrayCollection();
@@ -77,6 +92,42 @@ class GestionWorkflow
     public function setActive(string $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getTotal(): ?int
+    {
+        return $this->total;
+    }
+
+    public function setTotal(int $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

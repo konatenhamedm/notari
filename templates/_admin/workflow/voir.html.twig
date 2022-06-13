@@ -13,7 +13,27 @@
     <div class="modal-body ">
         {# {{ include('includes/ajax/response.html.twig') }} #}
         <div class="row">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label class="sr-onl" for="userinput1">Titre</label>
+                    {{ form_widget(form.titre,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Titre'}}) }}
+                </div>
+                <div class="form-group col-md-4">
+                    {# <div class="form-group">#}
+                    {# <label class="form-label">Type Acte</label>#}
+                    <label class="sr-onl" for="userinput1">Type acte</label>
+                    <select multiple="multiple" class="single-select" name="type">
 
+                        {% for data in type %}
+                            <option value="{{ data.id }}" {% if loop.first %}selected="selected"{% endif %}>{{ data.titre }}</option>
+                        {% endfor %}
+                        {#<option value="2">Acte de constitution</option>#}
+                        {# <option value="3">Third</option>
+                         <option value="4"  selected="selected">Fourth</option>#}
+                    </select>
+                    {# </div>#}
+                </div>
+            </div>
             <div class="col-lg-12 groupe" id="groupe" data-prototype="{{ image(form.workflow.vars.prototype)|e('html_attr') }}">
 
                 {#   <div class="row" >#}
@@ -34,18 +54,7 @@
                             workflow </a>
                     </div>
                     <div class="col-md-4">
-                        {# <div class="form-group">#}
-                        {# <label class="form-label">Type Acte</label>#}
-                        <select multiple="multiple" class="single-select" name="type">
 
-                            {% for data in type %}
-                                <option value="{{ data.id }}" {% if loop.first %}selected="selected"{% endif %}>{{ data.titre }}</option>
-                            {% endfor %}
-                            {#<option value="2">Acte de constitution</option>#}
-                            {# <option value="3">Third</option>
-                             <option value="4"  selected="selected">Fourth</option>#}
-                        </select>
-                        {# </div>#}
                     </div>
                 </div>
 

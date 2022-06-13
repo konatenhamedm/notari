@@ -44,11 +44,17 @@ class Type
      */
     private $dossiers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=GestionWorkflow::class, mappedBy="type")
+     */
+    private $gestionWorkflows;
+
     public function __construct()
     {
         $this->actes = new ArrayCollection();
         $this->workflows = new ArrayCollection();
         $this->dossiers = new ArrayCollection();
+        $this->gestionWorkflows = new ArrayCollection();
 
     }
 
@@ -165,6 +171,36 @@ class Type
             // set the owning side to null (unless already changed)
             if ($dossier->getTypeActe() === $this) {
                 $dossier->setTypeActe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GestionWorkflow>
+     */
+    public function getGestionWorkflows(): Collection
+    {
+        return $this->gestionWorkflows;
+    }
+
+    public function addGestionWorkflow(GestionWorkflow $gestionWorkflow): self
+    {
+        if (!$this->gestionWorkflows->contains($gestionWorkflow)) {
+            $this->gestionWorkflows[] = $gestionWorkflow;
+            $gestionWorkflow->setType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGestionWorkflow(GestionWorkflow $gestionWorkflow): self
+    {
+        if ($this->gestionWorkflows->removeElement($gestionWorkflow)) {
+            // set the owning side to null (unless already changed)
+            if ($gestionWorkflow->getType() === $this) {
+                $gestionWorkflow->setType(null);
             }
         }
 
