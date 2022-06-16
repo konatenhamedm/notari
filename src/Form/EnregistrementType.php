@@ -2,9 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\DocumentSigne;
+use App\Entity\Enregistrement;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -12,22 +11,37 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class DocumentSigneType extends AbstractType
+class EnregistrementType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-           /* ->add('status', CheckboxType::class, [
+            ->add('numero',TextType::class,[
                 'label'=>false,
-                'required' => false,
-            ])*/
-            ->add('libelle',TextType::class,[
+            ])
+            ->add('numeroEnregistrement',TextType::class,[
                 'label'=>false,
+            ])
+            ->add('dateEnvoi', DateType::Class, [
+                 "label" => false,
+                "required" => false,
+                "widget" => 'single_text',
+                "input_format" => 'Y-m-d',
+                "by_reference" => true,
+                "empty_data" => '',
+            ])
+            ->add('dateRetour', DateType::Class, [
+                 "label" => false,
+                "required" => false,
+                "widget" => 'single_text',
+                "input_format" => 'Y-m-d',
+                "by_reference" => true,
+                "empty_data" => '',
             ])
             ->add('path',FileType::class,[
                 'label'=>false,
                 'data_class' => null,
-                'required'=> true,
+                'required'=> false,
                 'mapped' => true,
                 'constraints' => [
                     new File([
@@ -41,14 +55,6 @@ class DocumentSigneType extends AbstractType
                 ],
 
             ])
-            ->add('date', DateType::Class, [
-                "label" => false,
-                "required" => false,
-                "widget" => 'single_text',
-                "input_format" => 'Y-m-d',
-                "by_reference" => true,
-                "empty_data" => '',
-            ])
            /* ->add('dossier')*/
         ;
     }
@@ -56,7 +62,7 @@ class DocumentSigneType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => DocumentSigne::class,
+            'data_class' => Enregistrement::class,
         ]);
     }
 }

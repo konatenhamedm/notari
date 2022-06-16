@@ -85,9 +85,16 @@ class CalendarController extends AbstractController
         {
             $redirect = $this->generateUrl('calendar');
            // dd($form->getData()->getClient());
-            $email = $form->getData()->getClient()->getEmail();
-            $identite = "";
+            $email= "";
+            if ($form->getData()->getClient()->getRaisonSocial() == "") {
+                $email =$form->getData()->getClient()->getEmail();
+            } else {
 
+                $email =$form->getData()->getClient()->getEmailEntreprise();
+            }
+
+            $identite = "";
+//dd($form->getData()->getClient());
             if ($form->getData()->getClient()->getRaisonSocial() == ""){
                 $identite =$form->getData()->getClient()->getNom()." ".$form->getData()->getClient()->getPrenom() ;
             }else{
@@ -97,7 +104,7 @@ class CalendarController extends AbstractController
 
             $objet = $form->getData()->getDescription();
             if($form->isValid()){
-                $mailerService->send(
+           /*     $mailerService->send(
                     'INFORMATION CONCERNANT LE RENDEZ-VOUS',
                     'konatenvaly@gmail.com',
                     $email,
@@ -108,7 +115,7 @@ class CalendarController extends AbstractController
                         'identite' =>  $identite,
                         'telephone' =>  '0704314164'
                     ]
-                );
+                );*/
 
                 $calendar->setActive(1)
                     ->setAllDay(false)

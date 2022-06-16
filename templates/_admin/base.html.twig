@@ -141,7 +141,28 @@
    <script src="{{ asset('admin/assets/js/sticky.js') }}"></script>
 
    <!-- CUSTOM JS -->
+    <script src="{{ asset('admin/assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('admin/assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('admin/assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('admin/assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ asset('admin/assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+    <!-- FILE UPLOADES JS -->
+    <script src="{{ asset('admin/assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ asset('admin/assets/plugins/fileuploads/js/file-upload.js') }}"></script>
 
+    <!-- FORM WIZARD JS-->
+    <script src="{{ asset('admin/assets/plugins/formwizard/jquery.smartWizard.js') }}"></script>
+    <script src="{{ asset('admin/assets/plugins/formwizard/fromwizard.js') }}"></script>
+    <{#script src="{{ asset('admin/assets/plugins/formwizard/jquery.smartWizard.js') }}"></script>
+    <script src="{{ asset('admin/assets/plugins/formwizard/fromwizard.js') }}"></script>#}
+
+    <!-- INTERNAl Jquery.steps js -->
+    <script src="{{ asset('admin/assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/plugins/parsleyjs/parsley.min.js') }}"></script>
+
+    <script src="{{ asset('admin/assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/form-wizard.js') }}"></script>
+    <script src="{{ asset('admin/admin/js/validation.js') }}"></script>
 
    <!-- Switcher js -->
    <script src="{{ asset('admin/assets/switcher/js/switcher.js') }}"></script>
@@ -162,7 +183,6 @@
                if ($target.attr('href') && $target.attr('href')[0] != '#') {
                    $this.find('.modal-content').load($target.attr('href'));
                    //$this.find('.modal-header').css('background','blue').show();
-
                }
 
            });

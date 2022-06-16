@@ -32,8 +32,10 @@
 			showStepURLhash: false,
 			toolbarSettings: {
 							  toolbarExtraButtons: [btnFinish]
-							}
+							},
+
 	});
+
 			
 	// Circles Smart Wizard 1
 	$('#smartwizard-2').smartWizard({
@@ -56,5 +58,13 @@
 							  toolbarExtraButtons: []
 							}
 	});
-	
+	refresh();
+	function refresh() {
+		let index = 0
+		$('.btn-toolbar').each(function () {
+			$(this).addClass('data-numberKey')
+			$('.btn-toolbar1').hide();
+			/* $(this).find('.numero:first').val(index);*/
+		})
+	}
 })(jQuery);

@@ -91,6 +91,11 @@ class Dossier
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Enregistrement::class, mappedBy="dossier",cascade={"persist"})
+     */
+    private $enregistrements;
+
 
     public function __construct()
     {
@@ -98,6 +103,7 @@ class Dossier
         $this->identifications = new ArrayCollection();
         $this->pieces = new ArrayCollection();
         $this->documentSignes = new ArrayCollection();
+        $this->enregistrements = new ArrayCollection();
     }
 
 
@@ -346,6 +352,36 @@ class Dossier
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Enregistrement>
+     */
+    public function getEnregistrements(): Collection
+    {
+        return $this->enregistrements;
+    }
+
+    public function addEnregistrement(Enregistrement $enregistrement): self
+    {
+        if (!$this->enregistrements->contains($enregistrement)) {
+            $this->enregistrements[] = $enregistrement;
+            $enregistrement->setDossier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnregistrement(Enregistrement $enregistrement): self
+    {
+        if ($this->enregistrements->removeElement($enregistrement)) {
+            // set the owning side to null (unless already changed)
+            if ($enregistrement->getDossier() === $this) {
+                $enregistrement->setDossier(null);
+            }
+        }
 
         return $this;
     }

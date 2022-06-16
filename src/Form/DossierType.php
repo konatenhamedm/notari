@@ -64,6 +64,18 @@ class DossierType extends AbstractType
                 'prototype' => true,
 
             ])
+            ->add('enregistrements', CollectionType::class, [
+                'entry_type' => EnregistrementType::class,
+                'entry_options' => [
+                    'label' => false
+                ],
+                'allow_add' => true,
+                'label' => false,
+                'by_reference' => false,
+                'allow_delete' => true,
+                'prototype' => true,
+
+            ])
             ->add('numeroClassification')
            /* ->add('dateCreation')*/
             ->add('dateClassification', DateType::Class, [

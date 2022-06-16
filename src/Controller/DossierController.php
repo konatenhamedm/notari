@@ -37,6 +37,7 @@ class DossierController extends AbstractController
     public function index(DossierRepository $repository): Response
     {
 
+        //dd($code);
         $pagination = $repository->getListe(0,'Acte de vente');
         //dd($pagination);
         $finalise = $repository->getListe(1,'Acte de vente');
@@ -104,7 +105,7 @@ class DossierController extends AbstractController
      * @param DossierRepository $repository
      * @return Response
      */
-    public function details(DossierWorkflowRepository $dossierWorkflowRepository,PieceRepository $pieceRepository,DocumentSigneRepository $documentSigneRepository, IdentificationRepository $identificationRepository,Request $request,Dossier $dossier, EntityManagerInterface $em,$id,DossierRepository $repository): Response
+    public function details(DossierRepository $repository,DossierWorkflowRepository $dossierWorkflowRepository,PieceRepository $pieceRepository,DocumentSigneRepository $documentSigneRepository, IdentificationRepository $identificationRepository,Request $request,Dossier $dossier, EntityManagerInterface $em,$id): Response
     {
 
         $form = $this->createForm(DossierType::class, $dossier, [
@@ -116,12 +117,14 @@ class DossierController extends AbstractController
         $form->handleRequest($request);
 
         $isAjax = $request->isXmlHttpRequest();
+
         // $type = $form->getData()->getType();
         if ($form->isSubmitted()) {
-
+            //dd($isAjax);
             $redirect = $this->generateUrl('dossierActeVente');
             $brochureFile = $form->get('documentSignes')->getData();
             $brochureFile2 = $form->get('pieces')->getData();
+            $brochureFile3 = $form->get('enregistrements')->getData();
 
             if ($form->isValid()) {
 
@@ -132,7 +135,16 @@ class DossierController extends AbstractController
                         // $fileName = md5(uniqid()).'.'.$file->guessExtension();
                         $file->move($this->getParameter('images_directory'), $newFilename);
                         $image->setPath($newFilename);
+                    }
+                }
 
+                foreach ($brochureFile3 as $image) {
+                    if (str_contains($image->getPath(),'.tmp')){
+                        $file = new File($image->getPath());
+                        $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
+                        // $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                        $file->move($this->getParameter('images_directory'), $newFilename);
+                        $image->setPath($newFilename);
                     }
                 }
 
@@ -370,67 +382,171 @@ class DossierController extends AbstractController
 
 
     /**
-     * @Route("/dossier/{id}/valider", name="valider", methods={"GET"})
-     * @param $id
-     * @param Dossier $parent
+     * @Route("/dossier/valider", name="valider", methods={"GET","POST"})
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param DossierRepository $repository
+     * @return Response
+     */
+    public function valider(Request $request,EntityManagerInterface $entityManager,DossierRepository $repository): Response
+    {
+        $response = new Response();
+        //dd("RES0");
+        if ($request->isXmlHttpRequest()) { // pour vérifier la présence d'une requete Ajax
+
+            $id = "";
+            $id = substr($request->getContent(), -1);
+             // dd();
+            if ($id) {
+                //dd($id);
+                //dd("==================",$id);
+               // $ensembles = $repository->listeDepartement($id);
+               $dossier = $repository->find($id);
+                $dossier->setEtape("Recueil des pièces");
+               $entityManager->persist($dossier);
+               $entityManager->flush();
+                $arrayCollection = array();
+                    $arrayCollection[] = array(
+                        'id' => "je",
+                        'libelle' => "Suis free",
+                        // ... Same for each property you want
+                    );
+
+                $data = json_encode($arrayCollection); // formater le résultat de la requête en json
+                //dd($data);
+                $response->headers->set('Content-Type', 'application/json');
+                $response->setContent($data);
+
+            }
+
+        }
+
+        return $response;
+    }
+
+    /**
+     * @Route("/dossier/valider2", name="valider2", methods={"POST"})
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function valider($id,Dossier $parent, EntityManagerInterface $entityManager): Response
+    public function valider2(EntityManagerInterface $entityManager,DossierRepository $repository,Request $request): Response
     {
+        $response = new Response();
+        //dd("RES0");
+        if ($request->isXmlHttpRequest()) { // pour vérifier la présence d'une requete Ajax
 
-        $parent->setEtape('Recueil des pièces');
-        $entityManager->persist($parent);
-        $entityManager->flush();
+            $id = "";
+            $id = substr($request->getContent(), -1);
+            // dd();
+            if ($id) {
+                //dd($id);
+                //dd("==================",$id);
+                // $ensembles = $repository->listeDepartement($id);
+                $dossier = $repository->find($id);
+                $dossier->setEtape("Signature");
+                $entityManager->persist($dossier);
+                $entityManager->flush();
+                $arrayCollection = array();
+                $arrayCollection[] = array(
+                    'id' => "je",
+                    'libelle' => "Suis free",
+                    // ... Same for each property you want
+                );
 
-        return $this->redirectToRoute('dossierActeVente');
-        /*return $this->json([
-            'code' => 200,
-            'message' => 'ça marche bien',
-        ], 200);*/
+                $data = json_encode($arrayCollection); // formater le résultat de la requête en json
+                //dd($data);
+                $response->headers->set('Content-Type', 'application/json');
+                $response->setContent($data);
+
+            }
+
+        }
+
+        return $response;
 
     }
 
     /**
-     * @Route("/dossier/{id}/valider2", name="valider2", methods={"GET"})
-     * @param $id
-     * @param Dossier $parent
+     * @Route("/dossier/valider3", name="valider3", methods={"POST"})
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function valider2($id,Dossier $parent, EntityManagerInterface $entityManager): Response
+    public function valider3(EntityManagerInterface $entityManager,DossierRepository $repository,Request $request): Response
     {
-        $parent->setEtape('Signature');
-        $entityManager->persist($parent);
-        $entityManager->flush();
+        $response = new Response();
+        //dd("RES0");
+        if ($request->isXmlHttpRequest()) { // pour vérifier la présence d'une requete Ajax
 
-        return $this->redirectToRoute('dossierActeVente');
-        /*return $this->json([
-            'code' => 200,
-            'message' => 'ça marche bien',
-        ], 200);*/
+            $id = "";
+            $id = substr($request->getContent(), -1);
+            // dd();
+            if ($id) {
+                //dd($id);
+                //dd("==================",$id);
+                // $ensembles = $repository->listeDepartement($id);
+                $dossier = $repository->find($id);
+                $dossier->setEtape("Enregistrement");
+                $entityManager->persist($dossier);
+                $entityManager->flush();
+                $arrayCollection = array();
+                $arrayCollection[] = array(
+                    'id' => "je",
+                    'libelle' => "Suis free",
+                    // ... Same for each property you want
+                );
+
+                $data = json_encode($arrayCollection); // formater le résultat de la requête en json
+                //dd($data);
+                $response->headers->set('Content-Type', 'application/json');
+                $response->setContent($data);
+
+            }
+
+        }
+
+        return $response;
 
     }
 
     /**
-     * @Route("/dossier/{id}/valider3", name="valider3", methods={"GET"})
-     * @param $id
-     * @param Dossier $parent
+     * @Route("/dossier/valider4", name="valider4", methods={"POST"})
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function valider3($id,Dossier $parent, EntityManagerInterface $entityManager): Response
+    public function valider4(EntityManagerInterface $entityManager,DossierRepository $repository,Request $request): Response
     {
+        $response = new Response();
+        //dd("RES0");
+        if ($request->isXmlHttpRequest()) { // pour vérifier la présence d'une requete Ajax
 
-        $parent->setEtape('Enregistrement');
-        $entityManager->persist($parent);
-        $entityManager->flush();
+            $id = "";
+            $id = substr($request->getContent(), -1);
+            // dd();
+            if ($id) {
+                //dd($id);
+                //dd("==================",$id);
+                // $ensembles = $repository->listeDepartement($id);
+                $dossier = $repository->find($id);
+                $dossier->setEtape("Retrait titre de propriété ");
+                $entityManager->persist($dossier);
+                $entityManager->flush();
+                $arrayCollection = array();
+                $arrayCollection[] = array(
+                    'id' => "je",
+                    'libelle' => "Suis free",
+                    // ... Same for each property you want
+                );
 
-        return $this->redirectToRoute('dossierActeVente');
-        /*return $this->json([
-            'code' => 200,
-            'message' => 'ça marche bien',
-        ], 200);*/
+                $data = json_encode($arrayCollection); // formater le résultat de la requête en json
+                //dd($data);
+                $response->headers->set('Content-Type', 'application/json');
+                $response->setContent($data);
+
+            }
+
+        }
+
+        return $response;
 
     }
 
