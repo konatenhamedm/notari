@@ -10,6 +10,7 @@ if($('#libelleEtape').val() === "Identification du client"){
     $('.step-22').show()
     $('.step-33').hide()
     $('.sw-btn-next').click()
+    $('.step-44').hide()
     $('.libelleVide').hide()
     $('.libelleVide2').show()
 }
