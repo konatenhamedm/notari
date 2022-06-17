@@ -29,8 +29,9 @@ $(document).ready(function () {
     function refresh() {
         let index = 0
         $('.ligne').each(function () {
+           // let number = doc
             index++;
-            $(this).attr('data-numberKey', index)
+            $(this).attr('data-numberKey', 'doc-'+index)
             $(this).find('.numero:first').val(index);
         })
     }

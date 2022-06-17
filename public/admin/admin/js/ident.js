@@ -1,34 +1,29 @@
 var id_select = $('#dossier').val();
+var vendeur = $('.vendeur').val();
+var acheteur = $('.acheteur').val();
 var lib = $('#libelleEtape');
+
+
 $('#ident').click(function (event){
     event.preventDefault();
     const btn = $(this);
     $.ajax({
         method: "POST",
         url: "valider",
-        data: { id: id_select },
+        data: { "id": id_select},
         dataType:   'json',
         contentType: "application/json",
     })
         .done(function( msg ) {
+           //$("form").submit().ajaxSubmit();
+           //$('.tt').get(0).click()
             btn.hide();
             lib.val("Recueil des pièces")
             $('.step-22').show()
              $('.sw-btn-next').click()
+            $('#piece_valider').hide()
             $('.libelleVide').hide()
 });
-
-/*
-    if(lib.val() === "Identification du client"){
-         $('.step-22').hide()
-         $('.libelleVide').show()
-        //$('.sw-btn-next').click()
-    }else if(lib.val() === "Recueil des pièces") {
-        $('.step-22').show()
-        $('.libelleVide').hide()
-      // $('.sw-btn-next').click()
-    }*/
-
 })
 
 $('#piece_valider').click(function (event){
@@ -46,6 +41,8 @@ $('#piece_valider').click(function (event){
             lib.val("Signature")
             $('.step-33').show()
             $('.sw-btn-next').click()
+            $('#signer').show()
+
             $('.libelleVide2').hide()
         });
 
@@ -69,7 +66,7 @@ $('#signer').click(function (event){
     $.ajax({
         method: "POST",
         url: "valider3",
-        data: { id: id_select },
+        data: { id: id_select},
         dataType:   'json',
         contentType: "application/json",
     })
@@ -77,6 +74,7 @@ $('#signer').click(function (event){
             btn.hide();
             lib.val("Enregistrement")
             $('.step-44').show()
+            $('#enr').show()
             $('.sw-btn-next').click()
             $('.libelleVide3').hide()
         });

@@ -57,13 +57,13 @@
                                          {% endfor %}
                      <input class="after" type="hidden"/>
                             </span>
-                                    {% if dossier.etape == "Identification du client"%}
+                                  {#  {% if dossier.etape == "Identification du client"%}
                                         <div class="row">
-                                            <div class="col-md-4"><a class="btn btn-primary " id="ident" style=""
+                                            <div class="col-md-4"><a  class="btn btn-success pd-x-25" id="ident" style=""
                                                                       >Finir</a></div>
                                             <div class="col-md-8"></div>
                                         </div>
-                                    {% endif %}
+                                    {% endif %}#}
                                 </div>
 
                                 <div id="step-2" class=" ">
@@ -94,11 +94,11 @@
                             </span>
 
                                            {# {% if piece_nombre == 2 and dossier.etape == "Recueil des pièces"%}#}
-                                                <div class="row">
-                                                    <div class="col-md-4"><a class="btn btn-primary " style="" id="piece_valider"
+                                             {#   <div class="row">
+                                                    <div class="col-md-4"><a class="btn btn-default pd-x-2" style="" id="piece_valider"
                                                         >Finir</a></div>
                                                     <div class="col-md-8"></div>
-                                                </div>
+                                                </div>#}
                                             {#{% endif %}#}
                                         </div>
 
@@ -132,11 +132,11 @@
                             </span>
 
                                       {# {% if document_nombre > 0 and dossier.etape == "Signature"%}#}
-                                           <div class="row" {% if dossier.etape == "Enregistrement" %} style="display: none" {% endif %}>
-                                               <div class="col-md-4"><a class="btn btn-primary " style="" id="signer"
+                                         {#  <div class="row" {% if dossier.etape == "Enregistrement" %} style="display: none" {% endif %}>
+                                               <div class="col-md-4"><a class="btn btn-default pd-x-2" style="" id="signer"
                                                    >Finir</a></div>
                                                <div class="col-md-8"></div>
-                                           </div>
+                                           </div>#}
                                       {# {% endif %}#}
                                    </div>
                                 </div>
@@ -167,11 +167,11 @@
                             </span>
 
                                        {# {% if document_nombre > 0 and dossier.etape == "Signature"%}#}
-                                            <div class="row" {% if dossier.etape == "Retrait titre de propriété" %} style="display: none" {% endif %}>
-                                                <div class="col-md-4"><a class="btn btn-primary " style="" id="enr"
+                                          {#  <div class="row" {% if dossier.etape == "Retrait titre de propriété" %} style="display: none" {% endif %}>
+                                                <div class="col-md-4"><a class="btn btn-default pd-x-25" style="" id="enr"
                                                     >Finir</a></div>
                                                 <div class="col-md-8"></div>
-                                            </div>
+                                            </div>#}
                                        {# {% endif %}#}
                                     </div>
                                 </div>
@@ -238,9 +238,16 @@
 
     </div>
     <div class="modal-footer">
-        <a href="{{ path('dossierActeVente') }}" class="btn btn-secondary">Fermer</a>
+        <a href="{{ path('dossierActeVente') }}" class="btn btn-secondary yello">Fermer</a>
         {# <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>#}
         <button class="btn btn-primary " >Valider</button>
+        {% if dossier.etape == "Identification du client"%}
+        <a  class="btn btn-default pd-x-25" id="ident" style=""
+        >Finir</a>
+        {% endif %}
+        <a class="btn btn-default pd-x-25" style="" id="enr">Finir</a>
+        <a class="btn btn-default pd-x-2" style="" id="signer">Finir</a>
+        <a class="btn btn-default pd-x-2" style="" id="piece_valider">Finir</a>
     </div>
     {{ form_end(form) }}
 
@@ -278,5 +285,13 @@
     <script src="{{ asset('admin/assets/js/form-wizard.js') }}"></script>
     <script src="{{ asset('admin/admin/js/validation.js') }}"></script>
     <script src="{{ asset('admin/admin/js/details.js') }}"></script>
-
+<script>
+    /*$('.yello').hide()
+    if($('#libelleEtape').val() === "Identification du client"){
+        $('#piece_valider').hide()
+        $('#signer').hide()
+        $('#enr').hide()
+    }*/
+    //alert($('#libelleEtape').val())
+</script>
 {% endblock %}

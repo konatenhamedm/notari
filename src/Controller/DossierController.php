@@ -391,7 +391,7 @@ class DossierController extends AbstractController
     public function valider(Request $request,EntityManagerInterface $entityManager,DossierRepository $repository): Response
     {
         $response = new Response();
-        //dd("RES0");
+     //  dd(($request->get('vendeur')));
         if ($request->isXmlHttpRequest()) { // pour vérifier la présence d'une requete Ajax
 
             $id = "";
@@ -474,7 +474,7 @@ class DossierController extends AbstractController
     public function valider3(EntityManagerInterface $entityManager,DossierRepository $repository,Request $request): Response
     {
         $response = new Response();
-        //dd("RES0");
+
         if ($request->isXmlHttpRequest()) { // pour vérifier la présence d'une requete Ajax
 
             $id = "";
