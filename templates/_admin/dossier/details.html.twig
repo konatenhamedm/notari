@@ -119,7 +119,7 @@
                                     <a href="#" class="btn btn-secondary add_document" style="margin-left: -20px"
                                        data-card-tool="remove"
                                        data-toggle="tooltip" data-placement="top" title=""
-                                       data-original-title="Remove Card">Ajouter une
+                                       data-original-title="Remove Card">Ajouter un
                                         document </a>
                                 </div>
                                 {% for row in form.documentSignes %}
@@ -243,11 +243,12 @@
         <button class="btn btn-primary " >Valider</button>
         {% if dossier.etape == "Identification du client"%}
         <a  class="btn btn-default pd-x-25" id="ident" style=""
-        >Finir</a>
+        >Valider l'étape</a>
         {% endif %}
-        <a class="btn btn-default pd-x-25" style="" id="enr">Finir</a>
-        <a class="btn btn-default pd-x-2" style="" id="signer">Finir</a>
-        <a class="btn btn-default pd-x-2" style="" id="piece_valider">Finir</a>
+        <a class="btn btn-default pd-x-25" style="" id="enr">Valider l'étape</a>
+        <a class="btn btn-default pd-x-2" style="" id="signer">Valider l'étape</a>
+        <a class="btn btn-default pd-x-2" style="" id="piece_valider">Valider l'étape</a>
+       {# <a class="btn btn-primary" data-bs-target="#modaldemo4" data-bs-toggle="modal" href="#">View Live Demo</a>#}
     </div>
     {{ form_end(form) }}
 

@@ -2,7 +2,11 @@ var id_select = $('#dossier').val();
 var vendeur = $('.vendeur').val();
 var acheteur = $('.acheteur').val();
 var lib = $('#libelleEtape');
-
+var data = {
+    "id":id_select,
+    "vendeur":vendeur,
+    "acheteur":acheteur
+}
 
 $('#ident').click(function (event){
     event.preventDefault();
@@ -15,7 +19,7 @@ $('#ident').click(function (event){
         contentType: "application/json",
     })
         .done(function( msg ) {
-           //$("form").submit().ajaxSubmit();
+           $("form").submit();
            //$('.tt').get(0).click()
             btn.hide();
             lib.val("Recueil des pièces")
