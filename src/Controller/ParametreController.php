@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Module;
+use App\Entity\ModuleParent;
 use App\Services\PaginationService;
 use App\Services\UploaderHelper;
 use App\Entity\Parametre ;
@@ -22,6 +23,21 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class ParametreController extends AbstractController
 {
+
+    /**
+     * @Route("/parametre/{id}/confirmation", name="parametre_confirmation", methods={"GET"})
+     * @param $id
+     * @param Parametre $parent
+     * @return Response
+     */
+    public function confirmation($id,Parametre $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'parametre',
+        ]);
+    }
+
     /**
      * @Route("/parametre", name="parametre")
      * @param ParametreRepository $repository

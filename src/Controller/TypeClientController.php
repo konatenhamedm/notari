@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\TypeSociete;
 use App\Repository\TypeClientRepository;
 use App\Services\PaginationService;
 use App\Services\Services;
@@ -21,8 +22,22 @@ use Symfony\Component\Serializer\SerializerInterface;
 class TypeClientController extends AbstractController
 {
     /**
+     * @Route("/typeClient/{id}/confirmation", name="typeClient_confirmation", methods={"GET"})
+     * @param $id
+     * @param TypeClient $parent
+     * @return Response
+     */
+    public function confirmation($id,TypeClient $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'typeClient',
+        ]);
+    }
+
+    /**
      * @Route("/typeClient", name="typeClient")
-     * @param PaginationService $paginationService
+     * @param TypeClientRepository $repository
      * @return Response
      */
     public function index(TypeClientRepository $repository): Response

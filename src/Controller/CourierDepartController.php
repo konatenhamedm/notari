@@ -20,7 +20,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CourierDepartController extends AbstractController
 {
-
+    /**
+     * @Route("/courierDepart/{id}/confirmation", name="courierDepart_confirmation", methods={"GET"})
+     * @param $id
+     * @param CourierArrive $parent
+     * @return Response
+     */
+    public function confirmation($id,CourierArrive $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'courierDepart',
+        ]);
+    }
     /**
      * @Route("/courrier-depart", name="courierDepart")
      * @param CourierArriveRepository $repository

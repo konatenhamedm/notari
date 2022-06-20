@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Acte;
+use App\Entity\Calendar;
 use App\Form\ActeType;
 use App\Repository\ActeRepository;
 use App\Repository\CourierArriveRepository;
@@ -21,6 +22,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ActeController extends AbstractController
 {
+
+    /**
+     * @Route("/acte/{id}/confirmation", name="acte_confirmation", methods={"GET"})
+     * @param $id
+     * @param Acte $parent
+     * @return Response
+     */
+    public function confirmation($id,Acte $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'acte',
+        ]);
+    }
+
+
     /**
      * @Route("/acte", name="acte")
      * @param ActeRepository $repository

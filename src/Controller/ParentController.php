@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Type;
 use App\Repository\ModuleParentRepository;
 use App\Services\PaginationService;
 use App\Services\Services;
@@ -20,6 +21,20 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class ParentController extends AbstractController
 {
+    /**
+     * @Route("/parent/{id}/confirmation", name="parent_confirmation", methods={"GET"})
+     * @param $id
+     * @param ModuleParent $parent
+     * @return Response
+     */
+    public function confirmation($id,ModuleParent $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'parent',
+        ]);
+    }
+
     /**
      * @Route("/parent", name="parent")
      * @param ModuleParentRepository $repository

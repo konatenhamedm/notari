@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Dossier;
 use App\Repository\ModuleRepository;
 use App\Services\PaginationService;
 use App\Entity\Module;
@@ -170,6 +171,19 @@ class ModuleController extends AbstractController
             'message' => 'ça marche bien',
             'active' => $module->getActive(),
         ], 200);
+    }
+    /**
+     * @Route("/module/{id}/confirmation", name="module_confirmation", methods={"GET"})
+     * @param $id
+     * @param Module $parent
+     * @return Response
+     */
+    public function confirmation($id,Module $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'module',
+        ]);
     }
 
 

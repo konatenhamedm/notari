@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\CourierArrive;
 use App\Entity\Fichier;
+use App\Entity\Parametre;
 use App\Form\CourierArriveType;
 use App\Repository\CourierArriveRepository;
 use App\Repository\DepartementRepository;
@@ -23,6 +24,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CourierInterneController extends AbstractController
 {
+    /**
+     * @Route("/courierInterne/{id}/confirmation", name="courierInterne_confirmation", methods={"GET"})
+     * @param $id
+     * @param CourierArrive $parent
+     * @return Response
+     */
+    public function confirmation($id,CourierArrive $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'courierInterne',
+        ]);
+    }
 
     /**
      * @Route("/courrier-interne", name="courierInterne")

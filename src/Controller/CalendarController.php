@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Calendar;
+use App\Entity\Client;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
 use App\Services\MailerService;
@@ -20,6 +21,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CalendarController extends AbstractController
 {
+
+    /**
+     * @Route("/calendar/{id}/confirmation", name="calendar_confirmation", methods={"GET"})
+     * @param $id
+     * @param Calendar $parent
+     * @return Response
+     */
+    public function confirmation($id,Calendar $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'calendar',
+        ]);
+    }
+
+
     /**
      * @Route("/calendar", name="calendar")
      * @param CalendarRepository $repository

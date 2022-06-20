@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Module;
 use App\Form\GestionWorkflowType;
 use App\Repository\GestionWorkflowRepository;
 use App\Repository\TypeRepository;
@@ -104,6 +105,20 @@ class WorkflowController extends AbstractController
             'type' => $repository->findAll(),
         ]);
     }
+    /**
+     * @Route("/workflow/{id}/confirmation", name="workflow_confirmation", methods={"GET"})
+     * @param $id
+     * @param GestionWorkflow $parent
+     * @return Response
+     */
+    public function confirmation($id,GestionWorkflow $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'workflow',
+        ]);
+    }
+
 
     /**
      * @Route("/workflow/{id}/edit", name="workflow_edit", methods={"GET","POST"})

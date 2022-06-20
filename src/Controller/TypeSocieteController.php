@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\GestionWorkflow;
 use App\Entity\TypeSociete;
 use App\Form\TypeSocieteType;
 use App\Repository\TypeSocieteRepository;
@@ -19,6 +20,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TypeSocieteController extends AbstractController
 {
+
+    /**
+     * @Route("/typeSociete/{id}/confirmation", name="typeSociete_confirmation", methods={"GET"})
+     * @param $id
+     * @param TypeSociete $parent
+     * @return Response
+     */
+    public function confirmation($id,TypeSociete $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'typeSociete',
+        ]);
+    }
+
 
     /**
      * @Route("/typeSociete", name="typeSociete")

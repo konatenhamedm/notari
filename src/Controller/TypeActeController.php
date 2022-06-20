@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\TypeClient;
 use App\Form\TypeActeType;
 use App\Repository\TypeRepository;
 use App\Services\PaginationService;
@@ -20,6 +21,21 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class TypeActeController extends AbstractController
 {
+
+    /**
+     * @Route("/typeActe/{id}/confirmation", name="typeActe_confirmation", methods={"GET"})
+     * @param $id
+     * @param Type $parent
+     * @return Response
+     */
+    public function confirmation($id,Type $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'typeActe',
+        ]);
+    }
+
     /**
      * @Route("/typeActe", name="typeActe")
      * @param TypeRepository $repository

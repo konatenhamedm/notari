@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\CourierArrive;
 use App\Form\ClientType;
 use App\Repository\ClientRepository;
 use App\Services\PaginationService;
@@ -19,6 +20,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ClientController extends AbstractController
 {
+    /**
+     * @Route("/client/{id}/confirmation", name="client_confirmation", methods={"GET"})
+     * @param $id
+     * @param Client $parent
+     * @return Response
+     */
+    public function confirmation($id,Client $parent): Response
+    {
+        return $this->render('_admin/modal/confirmation.html.twig',[
+            'id'=>$id,
+            'action'=>'client',
+        ]);
+    }
+
 
     /**
      * @Route("/client", name="client")
