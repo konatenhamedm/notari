@@ -335,6 +335,21 @@ class Client
      */
     private $emailEntreprise;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Identification1::class, mappedBy="acheteur")
+     */
+    private $identification1s;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Identification1::class, mappedBy="vendeur")
+     */
+    private $vendeurIdentification;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PieceVendeur::class, mappedBy="client")
+     */
+    private $pieceVendeurs;
+
 
     public function __construct()
     {
@@ -348,6 +363,9 @@ class Client
         $this->vendeur = new ArrayCollection();
         $this->pieces = new ArrayCollection();
         $this->acheteur = new ArrayCollection();
+        $this->identification1s = new ArrayCollection();
+        $this->vendeurIdentification = new ArrayCollection();
+        $this->pieceVendeurs = new ArrayCollection();
     }
 
     public  function getNomPrenoms(){
@@ -1196,6 +1214,96 @@ class Client
         public function setEmailEntreprise(string $emailEntreprise): self
         {
             $this->emailEntreprise = $emailEntreprise;
+
+            return $this;
+        }
+
+        /**
+         * @return Collection<int, Identification1>
+         */
+        public function getIdentification1s(): Collection
+        {
+            return $this->identification1s;
+        }
+
+        public function addIdentification1(Identification1 $identification1): self
+        {
+            if (!$this->identification1s->contains($identification1)) {
+                $this->identification1s[] = $identification1;
+                $identification1->setAcheteur($this);
+            }
+
+            return $this;
+        }
+
+        public function removeIdentification1(Identification1 $identification1): self
+        {
+            if ($this->identification1s->removeElement($identification1)) {
+                // set the owning side to null (unless already changed)
+                if ($identification1->getAcheteur() === $this) {
+                    $identification1->setAcheteur(null);
+                }
+            }
+
+            return $this;
+        }
+
+        /**
+         * @return Collection<int, Identification1>
+         */
+        public function getVendeurIdentification(): Collection
+        {
+            return $this->vendeurIdentification;
+        }
+
+        public function addVendeurIdentification(Identification1 $vendeurIdentification): self
+        {
+            if (!$this->vendeurIdentification->contains($vendeurIdentification)) {
+                $this->vendeurIdentification[] = $vendeurIdentification;
+                $vendeurIdentification->setVendeur($this);
+            }
+
+            return $this;
+        }
+
+        public function removeVendeurIdentification(Identification1 $vendeurIdentification): self
+        {
+            if ($this->vendeurIdentification->removeElement($vendeurIdentification)) {
+                // set the owning side to null (unless already changed)
+                if ($vendeurIdentification->getVendeur() === $this) {
+                    $vendeurIdentification->setVendeur(null);
+                }
+            }
+
+            return $this;
+        }
+
+        /**
+         * @return Collection<int, PieceVendeur>
+         */
+        public function getPieceVendeurs(): Collection
+        {
+            return $this->pieceVendeurs;
+        }
+
+        public function addPieceVendeur(PieceVendeur $pieceVendeur): self
+        {
+            if (!$this->pieceVendeurs->contains($pieceVendeur)) {
+                $this->pieceVendeurs[] = $pieceVendeur;
+                $pieceVendeur->setClient($this);
+            }
+
+            return $this;
+        }
+
+        public function removePieceVendeur(PieceVendeur $pieceVendeur): self
+        {
+            if ($this->pieceVendeurs->removeElement($pieceVendeur)) {
+                // set the owning side to null (unless already changed)
+                if ($pieceVendeur->getClient() === $this) {
+                    $pieceVendeur->setClient(null);
+                }
+            }
 
             return $this;
         }

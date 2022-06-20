@@ -96,6 +96,26 @@ class Dossier
      */
     private $enregistrements;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PieceVendeur::class, mappedBy="dossier",cascade={"persist"})
+     */
+    private $pieceVendeurs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Redaction::class, mappedBy="dossier",cascade={"persist"})
+     */
+    private $redactions;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Obtention::class, mappedBy="dossier",cascade={"persist"})
+     */
+    private $obtentions;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Remise::class, mappedBy="dossier",cascade={"persist"})
+     */
+    private $remises;
+
 
     public function __construct()
     {
@@ -104,6 +124,10 @@ class Dossier
         $this->pieces = new ArrayCollection();
         $this->documentSignes = new ArrayCollection();
         $this->enregistrements = new ArrayCollection();
+        $this->pieceVendeurs = new ArrayCollection();
+        $this->redactions = new ArrayCollection();
+        $this->obtentions = new ArrayCollection();
+        $this->remises = new ArrayCollection();
     }
 
 
@@ -380,6 +404,126 @@ class Dossier
             // set the owning side to null (unless already changed)
             if ($enregistrement->getDossier() === $this) {
                 $enregistrement->setDossier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PieceVendeur>
+     */
+    public function getPieceVendeurs(): Collection
+    {
+        return $this->pieceVendeurs;
+    }
+
+    public function addPieceVendeur(PieceVendeur $pieceVendeur): self
+    {
+        if (!$this->pieceVendeurs->contains($pieceVendeur)) {
+            $this->pieceVendeurs[] = $pieceVendeur;
+            $pieceVendeur->setDossier($this);
+        }
+
+        return $this;
+    }
+
+    public function removePieceVendeur(PieceVendeur $pieceVendeur): self
+    {
+        if ($this->pieceVendeurs->removeElement($pieceVendeur)) {
+            // set the owning side to null (unless already changed)
+            if ($pieceVendeur->getDossier() === $this) {
+                $pieceVendeur->setDossier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Redaction>
+     */
+    public function getRedactions(): Collection
+    {
+        return $this->redactions;
+    }
+
+    public function addRedaction(Redaction $redaction): self
+    {
+        if (!$this->redactions->contains($redaction)) {
+            $this->redactions[] = $redaction;
+            $redaction->setDossier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRedaction(Redaction $redaction): self
+    {
+        if ($this->redactions->removeElement($redaction)) {
+            // set the owning side to null (unless already changed)
+            if ($redaction->getDossier() === $this) {
+                $redaction->setDossier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Obtention>
+     */
+    public function getObtentions(): Collection
+    {
+        return $this->obtentions;
+    }
+
+    public function addObtention(Obtention $obtention): self
+    {
+        if (!$this->obtentions->contains($obtention)) {
+            $this->obtentions[] = $obtention;
+            $obtention->setDossier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeObtention(Obtention $obtention): self
+    {
+        if ($this->obtentions->removeElement($obtention)) {
+            // set the owning side to null (unless already changed)
+            if ($obtention->getDossier() === $this) {
+                $obtention->setDossier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Remise>
+     */
+    public function getRemises(): Collection
+    {
+        return $this->remises;
+    }
+
+    public function addRemise(Remise $remise): self
+    {
+        if (!$this->remises->contains($remise)) {
+            $this->remises[] = $remise;
+            $remise->setDossier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRemise(Remise $remise): self
+    {
+        if ($this->remises->removeElement($remise)) {
+            // set the owning side to null (unless already changed)
+            if ($remise->getDossier() === $this) {
+                $remise->setDossier(null);
             }
         }
 

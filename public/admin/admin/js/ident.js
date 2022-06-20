@@ -2,128 +2,130 @@ var id_select = $('#dossier').val();
 var vendeur = $('.vendeur').val();
 var acheteur = $('.acheteur').val();
 var lib = $('#libelleEtape');
-var data = {
-    "id":id_select,
-    "vendeur":vendeur,
-    "acheteur":acheteur
-}
 
-$('#ident').click(function (event){
-    event.preventDefault();
-    const btn = $(this);
+
+function ajax(etape) {
+
     $.ajax({
-        method: "POST",
+        method: "GET",
         url: "valider",
-        data: { "id": id_select},
-        dataType:   'json',
-        contentType: "application/json",
-    })
-        .done(function( msg ) {
-           $("form").submit();
-           //$('.tt').get(0).click()
-            btn.hide();
+        data: {"id": id_select, "etape": etape},
+        dataType: 'json',
+    }).done(function (response,status) {
+        //  $("form").submit();
+        //$('.tt').get(0).click()
+        console.log(response)
+        //alert(response.status)
+        if (etape === 1) {
             lib.val("Recueil des pièces")
             $('.step-22').show()
-             $('.sw-btn-next').click()
-            $('#piece_valider').hide()
-            $('.libelleVide').hide()
-});
-})
+            $('.sw-btn-next').click()
+            $('#ident').hide()
+            $('#piece_valider').show()
+            $('.libelleVide2').hide()
+        } else if (etape === 2) {
 
-$('#piece_valider').click(function (event){
-    event.preventDefault();
-    const btn = $(this);
-    $.ajax({
-        method: "POST",
-        url: "valider2",
-        data: { id: id_select },
-        dataType:   'json',
-        contentType: "application/json",
-    })
-        .done(function( msg ) {
-            btn.hide();
-            lib.val("Signature")
+            lib.val("Redaction")
+            $('.libelleVide3').hide()
             $('.step-33').show()
             $('.sw-btn-next').click()
-            $('#signer').show()
+            $('#redaction_valider').show()
 
-            $('.libelleVide2').hide()
-        });
+        } else if (etape === 3) {
 
-    /*
-        if(lib.val() === "Identification du client"){
-             $('.step-22').hide()
-             $('.libelleVide').show()
-            //$('.sw-btn-next').click()
-        }else if(lib.val() === "Recueil des pièces") {
-            $('.step-22').show()
-            $('.libelleVide').hide()
-          // $('.sw-btn-next').click()
-        }*/
-
-})
-
-
-$('#signer').click(function (event){
-    event.preventDefault();
-    const btn = $(this);
-    $.ajax({
-        method: "POST",
-        url: "valider3",
-        data: { id: id_select},
-        dataType:   'json',
-        contentType: "application/json",
-    })
-        .done(function( msg ) {
-            btn.hide();
-            lib.val("Enregistrement")
+            lib.val("Signature")
             $('.step-44').show()
-            $('#enr').show()
-            $('.sw-btn-next').click()
-            $('.libelleVide3').hide()
-        });
-
-    /*
-        if(lib.val() === "Identification du client"){
-             $('.step-22').hide()
-             $('.libelleVide').show()
-            //$('.sw-btn-next').click()
-        }else if(lib.val() === "Recueil des pièces") {
-            $('.step-22').show()
-            $('.libelleVide').hide()
-          // $('.sw-btn-next').click()
-        }*/
-
-})
-
-
-$('#enr').click(function (event){
-    event.preventDefault();
-    const btn = $(this);
-    $.ajax({
-        method: "POST",
-        url: "valider4",
-        data: { id: id_select },
-        dataType:   'json',
-        contentType: "application/json",
-    })
-        .done(function( msg ) {
-            btn.hide();
-            lib.val("Retrait titre de propriété")
-            $('.step-55').show()
+            $('#signer').show()
             $('.sw-btn-next').click()
             $('.libelleVide4').hide()
-        });
 
-    /*
-        if(lib.val() === "Identification du client"){
-             $('.step-22').hide()
-             $('.libelleVide').show()
-            //$('.sw-btn-next').click()
-        }else if(lib.val() === "Recueil des pièces") {
-            $('.step-22').show()
-            $('.libelleVide').hide()
-          // $('.sw-btn-next').click()
-        }*/
+        } else if (etape === 4) {
 
+            lib.val("Enregistrement")
+            $('.step-55').show()
+            $('.sw-btn-next').click()
+            $('.libelleVide5').hide()
+            $('#enr').show()
+        }
+        else if (etape === 5) {
+
+            lib.val("Obtention")
+            $('.step-66').show()
+            $('.sw-btn-next').click()
+            $('.libelleVide6').hide()
+            $('#obtention_valider').show()
+        }
+        else if (etape === 6) {
+
+            lib.val("Remise")
+            $('.step-77').show()
+            $('.sw-btn-next').click()
+            $('.libelleVide7').hide()
+            $('#remise_valider').show()
+        }
+        else if (etape === 7) {
+
+            lib.val("Classification")
+            $('.step-88').show()
+            $('.sw-btn-next').click()
+            $('.libelleVide8').hide()
+            $('#classification_valider').show()
+        }
+
+    });
+}
+
+$('#ident').click(function (event) {
+    event.preventDefault();
+
+    ajax(1)
+    const btn = $(this);
+    btn.hide();
+})
+
+$('#piece_valider').click(function (event) {
+    event.preventDefault();
+
+    ajax(2)
+    const btn = $(this);
+    btn.hide();
+})
+
+$('#redaction_valider').click(function (event) {
+    event.preventDefault();
+    ajax(3)
+    const btn = $(this);
+    btn.hide();
+})
+
+$('#signer').click(function (event) {
+    event.preventDefault();
+    ajax(4)
+    const btn = $(this);
+    btn.hide();
+})
+
+$('#enr').click(function (event) {
+    event.preventDefault();
+    ajax(5)
+    const btn = $(this);
+    btn.hide();
+})
+$('#obtention_valider').click(function (event) {
+    event.preventDefault();
+    ajax(6)
+    const btn = $(this);
+    btn.hide();
+})
+$('#remise_valider').click(function (event) {
+    event.preventDefault();
+    ajax(7)
+    const btn = $(this);
+    btn.hide();
+})
+$('#classification_valider').click(function (event) {
+    event.preventDefault();
+    ajax(8)
+    const btn = $(this);
+    btn.hide();
 })

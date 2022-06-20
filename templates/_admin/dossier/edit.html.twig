@@ -74,10 +74,13 @@
 {% endblock %}
 {#{% include 'admin/macros/fichier.html.twig'  %}#}
 
-{#
+
 {% block javascripts %}
 
     <script src="{{ asset('admin/admin/js/jquery3.1.js') }}"></script>
-    <script src="{{ asset('admin/admin/js/groupe.js') }}"></script>
 
-{% endblock %}#}
+    <script>
+        $('#dossier_identifications').hide()
+    </script>
+
+{% endblock %}

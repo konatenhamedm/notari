@@ -27,7 +27,7 @@ class DocumentSigneType extends AbstractType
             ->add('path',FileType::class,[
                 'label'=>false,
                 'data_class' => null,
-                'required'=> true,
+                'required'=> false,
                 'mapped' => true,
                 'constraints' => [
                     new File([
