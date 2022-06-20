@@ -149,15 +149,6 @@ class DossierController extends AbstractController
 
             if ($form->isValid()) {
 
-             /*   foreach ($brochureFile as $image) {
-                    if (str_contains($image->getPath(),'.tmp')){
-                        $file = new File($image->getPath());
-                        $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                        // $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                        $file->move($this->getParameter('images_directory'), $newFilename);
-                        $image->setPath($newFilename);
-                    }
-                }*/
                 $this->saveFile($brochureFile);
                 $this->saveFile($piecesVendeur);
                 $this->saveFile($brochureFile3);
@@ -165,37 +156,6 @@ class DossierController extends AbstractController
                 $this->saveFile($redaction);
                 $this->saveFile($remise);
                 $this->saveFile($obtention);
-
-               /* foreach ($piecesVendeur as $image) {
-                    if (str_contains($image->getPath(),'.tmp')){
-                        $file = new File($image->getPath());
-                        $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                        // $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                        $file->move($this->getParameter('images_directory'), $newFilename);
-                        $image->setPath($newFilename);
-                    }
-                }
-
-                foreach ($brochureFile3 as $image) {
-                    if (str_contains($image->getPath(),'.tmp')){
-                        $file = new File($image->getPath());
-                        $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                        // $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                        $file->move($this->getParameter('images_directory'), $newFilename);
-                        $image->setPath($newFilename);
-                    }
-                }*/
-
-               /* foreach ($brochureFile2 as $image) {
-                    if (str_contains($image->getPath(),'.tmp')){
-                        $file = new File($image->getPath());
-                        $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
-                        // $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                        $file->move($this->getParameter('images_directory'), $newFilename);
-                        $image->setPath($newFilename);
-
-                    }
-                }*/
 
 
                 $em->persist($dossier);
@@ -230,8 +190,11 @@ class DossierController extends AbstractController
     /**
      * @Route("/dossier/new", name="dossierActeVente_new", methods={"GET","POST"})
      * @param Request $request
+     * @param DocumentTypeActeRepository $documentTypeActeRepository
+     * @param WorkflowRepository $workflowRepository
      * @param EntityManagerInterface $em
      * @param DossierRepository $repository
+     * @param TypeRepository $typeRepository
      * @return Response
      */
     public function new(Request $request,DocumentTypeActeRepository $documentTypeActeRepository,WorkflowRepository $workflowRepository, EntityManagerInterface $em,DossierRepository $repository,TypeRepository $typeRepository): Response

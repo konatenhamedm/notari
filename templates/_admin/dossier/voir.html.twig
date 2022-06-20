@@ -79,7 +79,15 @@
 
     <script src="{{ asset('admin/admin/js/jquery3.1.js') }}"></script>
     <script>
-        $('#dossier_identifications').hide()
+        $('#dossier_identifications').remove()
+        $('#dossier_remises').remove()
+        $('#dossier_redactions').remove()
+        $('#dossier_obtentions').remove()
+        $('#dossier_pieces').remove()
+        $('#dossier_enregistrements').remove()
+        $('#dossier_pieceVendeurs').remove()
+        $('#dossier_documentSignes').remove()
+        $(".readonly").prop("disabled", true);
     </script>
 
 {% endblock %}

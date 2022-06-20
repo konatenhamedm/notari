@@ -23,7 +23,7 @@ class Obtention
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=,nullable=true)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $path;
 
