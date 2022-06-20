@@ -81,6 +81,7 @@ class Services
             'courierDepart'=>'courierDepart',
             'courierInterne'=>'courierInterne',
             'calendar'=>'calendar',
+            'documentTypeActe'=>'documentTypeActe',
         ];
      /*   foreach ($this->container as $el=> $params) {
           $resultat=  $params->getDefaults();
