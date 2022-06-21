@@ -6,6 +6,20 @@
 {% from '_admin/macros/redaction.html.twig' import redaction %}
 {% from '_admin/macros/obtention.html.twig' import obtention %}
 {% from '_admin/macros/remise.html.twig' import remise %}
+
+{% block style %}
+<style>
+    .sw-theme-dots>ul.step-anchor>li.done>a:after {
+        background: green;
+    }
+    .sw-theme-dots>ul.step-anchor>li.active>a:after {
+        background: purple;
+    }
+    .sw-theme-dots>ul.step-anchor>li>a:after {
+        background: grey;
+    }
+</style>
+{% endblock %}
 {% block page_content %}
 
     <div class="modal-header bg-secondary-gradient">
@@ -30,9 +44,10 @@
                         <input type="hidden" id="nbre" value="{{ piece_nombre }}">
                         <div id="smartwizard-3" class="sw-main sw-theme-dots">
 
-                            <ul>
+                            <ul >
                                 {% for entete in workflow %}
-                                    <li><a href="#step-{{ entete.nbre }}">{{ entete.nbre }}</a></li>
+                                    <li ><a href="#step-{{ entete.nbre }}"
+                                            >{{ entete.nbre }}</a></li>
                                     {#<li><a href="#step-11">New User</a></li>
                                     <li><a href="#step-12">End</a></li>#}
                                 {% endfor %}

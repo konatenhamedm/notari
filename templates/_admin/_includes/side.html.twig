@@ -47,7 +47,7 @@
                     {% for groupe in menu.liste %}
                         {% if module.module == groupe.module %}
 
-                        <li><a href="{{ path(groupe.lien) }}" class="slide-item"> {{ groupe.groupe |lower |capitalize }}</a></li>
+                        <li><a  class="slide-item" {% if groupe.lien=="documentTypeActe" %} data-bs-toggle="modal" data-bs-target="#extralargemodal" href="{{ path('documentTypeActe_new') }}" {% else %} href="{{ path(groupe.lien) }}" {% endif %}> {{ groupe.groupe |lower |capitalize }}</a></li>
                         {% endif %}
 
                     {% endfor %}
