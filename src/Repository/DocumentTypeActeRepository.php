@@ -47,7 +47,14 @@ class DocumentTypeActeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
+    public function getFichierLibelle($value){
+        return $this->createQueryBuilder("a")
+            ->innerJoin('a.type','t')
+            ->where('t.titre=:libelle')
+            ->setParameter('libelle', $value)
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return DocumentTypeActe[] Returns an array of DocumentTypeActe objects
 //     */

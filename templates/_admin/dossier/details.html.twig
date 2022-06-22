@@ -355,6 +355,7 @@
 {% block javascripts %}
 
     <script src="{{ asset('admin/admin/js/jquery3.1.js') }}"></script>
+    <script src="{{ asset('admin/admin/jquery.form.js') }}"></script>
     <script src="{{ asset('admin/admin/js/piece.js') }}"></script>
     <script src="{{ asset('admin/admin/js/identification.js') }}"></script>
     <script src="{{ asset('admin/admin/js/redaction.js') }}"></script>
@@ -391,7 +392,54 @@
     <script src="{{ asset('admin/assets/plugins/tabs/jquery.multipurpose_tabcontent.js') }}"></script>
     <script src="{{ asset('admin/assets/plugins/tabs/tab-content.js') }}"></script>
 <script>
+    $(document).on('click', '.btn-ajax', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
 
+
+        const $this = $(this);
+        const $btn = $this;
+        const $form = $this.closest('form');
+
+        const form_id = $form.attr('id');
+
+        const data = {};
+        if ($this.attr('name')) {
+            data[$this.attr('name')] = 1;
+        }
+
+        $form.ajaxSubmit({
+            cache: false,
+            data: data,
+            beforeSend: () => {
+                console.log('Before send....');
+            },
+            success: function (data, status, $xhr, $form) {
+                const url = data.url;
+
+
+                const currentTab = url.current_tab;
+                const $link = $(url.tab)
+
+                $link.removeClass('inactive');
+                if (!$link.data('href')) {
+                    $link.attr('data-href', url.url);
+                }
+
+         /*       load_tab($link);
+
+
+
+                if (currentTab && currentTab.url && currentTab.tab) {
+
+                    const $oldLink = $(currentTab.tab);
+                    $oldLink.removeData('href');
+                    $oldLink.attr('data-href', currentTab.url);
+                }*/
+
+            }
+        });
+    });
     /*$('.yello').hide()
     if($('#libelleEtape').val() === "Identification du client"){
         $('#piece_valider').hide()

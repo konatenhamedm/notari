@@ -61,6 +61,7 @@ function ajax(etape) {
             $('.step-77').show()
             $('.sw-btn-next').click()
             $('.libelleVide7').hide()
+            $(".readonly").prop("disabled", true);
             $('#remise_valider').show()
         }
         else if (etape === 7) {
@@ -68,6 +69,7 @@ function ajax(etape) {
             lib.val("Classification")
             $('.step-88').show()
             $('.sw-btn-next').click()
+            $(".readonly").prop("disabled", true);
             $('.libelleVide8').hide()
             $('#classification_valider').show()
         }

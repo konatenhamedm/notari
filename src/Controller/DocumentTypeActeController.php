@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\DocumentTypeActe;
 use App\Form\GestionTypeActeType;
+use App\Repository\DocumentTypeActeRepository;
 use App\Repository\GestionTypeActeRepository;
 use App\Repository\TypeRepository;
 use App\Repository\WorkflowRepository;
@@ -50,9 +52,10 @@ class DocumentTypeActeController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param TypeRepository $repository
+     * @param DocumentTypeActeRepository $documentsRepository
      * @return Response
      */
-    public function new(Request $request, EntityManagerInterface $em, TypeRepository $repository): Response
+    public function new(Request $request, EntityManagerInterface $em, TypeRepository $repository,DocumentTypeActeRepository $documentsRepository): Response
     {
         $document = new GestionTypeActe();
         $form = $this->createForm(GestionTypeActeType::class, $document, [
@@ -60,7 +63,13 @@ class DocumentTypeActeController extends AbstractController
             'action' => $this->generateUrl('documentTypeActe_new')
         ]);
         $form->handleRequest($request);
+      //  dd($request);
+       $documents = $documentsRepository->getFichierLibelle("Acte de vente");
 
+       foreach ($documents as $item){
+          $doc = new DocumentTypeActe();
+           $document->addDocumentTypeActe($doc);
+       }
         $isAjax = $request->isXmlHttpRequest();
 
         if ($form->isSubmitted()) {
