@@ -66,10 +66,10 @@ class DocumentTypeActeController extends AbstractController
       //  dd($request);
        $documents = $documentsRepository->getFichierLibelle("Acte de vente");
 
-       foreach ($documents as $item){
+    /*   foreach ($documents as $item){
           $doc = new DocumentTypeActe();
            $document->addDocumentTypeActe($doc);
-       }
+       }*/
         $isAjax = $request->isXmlHttpRequest();
 
         if ($form->isSubmitted()) {

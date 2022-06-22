@@ -146,7 +146,7 @@ class DossierController extends AbstractController
             $redaction = $form->get('redactions')->getData();
             $remise = $form->get('remises')->getData();
             $obtention = $form->get('obtentions')->getData();
-
+            $statut = 0;
             if ($form->isValid()) {
 
                 $this->saveFile($brochureFile);
