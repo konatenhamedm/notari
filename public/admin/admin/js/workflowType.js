@@ -4,6 +4,7 @@ $(document).ready(function () {
     // setup an "add a tag" link
     var $addTagButton = $('.add_groupe');
 
+
     /*var $after = $('tr');*/
     /*var $newLinkLi = $('<li></li>').append($addTagButton);*/
     /*    addForm();*/
@@ -19,21 +20,11 @@ $(document).ready(function () {
             //alert("jhghghg")
             e.preventDefault();
             addForm();
-           // refresh();
+            //refresh();
             // $('select').select2();
         })
-
+        addForm();
     })
-
-   /* function refresh() {
-        //let index = 0
-        $('.ligne').each(function () {
-          //  index++;
-         //   $(this).attr('data-numberKey', index)
-            $(this).find('.libelle').prop("disabled", false);
-
-        })
-    }*/
 
     function addForm() {
         var prototype = $collectionHolder.data('prototype');
@@ -42,9 +33,7 @@ $(document).ready(function () {
         newForm = newForm.replace(/__name__/g, index);
         $collectionHolder.data('index', index + 1);
 
-        var $card = $('<span class="container col-md-12"></span>')
-        /*  var $cardbody = $('<div class="row"></div>').append(newForm);*/
-
+        var $card = $('<span class="container col-md-12 "></span>');
         $card.append(newForm);
 
         addRemoveButton($card);
@@ -64,7 +53,7 @@ $(document).ready(function () {
 
             $(e.target).parents('.container').slideUp(1000, function () {
                 $(this).remove();
-
+                refresh();
             });
 
         })

@@ -58,31 +58,36 @@ class DocumentTypeActeController extends AbstractController
     public function new(Request $request, EntityManagerInterface $em, TypeRepository $repository,DocumentTypeActeRepository $documentsRepository): Response
     {
         $document = new GestionTypeActe();
+
+        $documents = $documentsRepository->getFichierLibelle("Acte de vente");
+
+        foreach ($documents as $item){
+
+            $document->addDocumentTypeActe($item);
+        }
+
         $form = $this->createForm(GestionTypeActeType::class, $document, [
             'method' => 'POST',
             'action' => $this->generateUrl('documentTypeActe_new')
         ]);
         $form->handleRequest($request);
       //  dd($request);
-       $documents = $documentsRepository->getFichierLibelle("Acte de vente");
 
-    /*   foreach ($documents as $item){
-          $doc = new DocumentTypeActe();
-           $document->addDocumentTypeActe($doc);
-       }*/
+
         $isAjax = $request->isXmlHttpRequest();
 
         if ($form->isSubmitted()) {
             $response = [];
-            $redirect = $this->generateUrl('documentTypeActe');
+            $redirect = $this->generateUrl('dashboard');
             $datas = $form->get('documentTypeActes')->getData();
-
+           // dd($datas);
             $typeActe = $repository->find($request->get('type'));
-            $total =0;
+
 
             if ($form->isValid()) {
 
                 foreach ($datas as $data) {
+                    //dd($data->getId());
                     $data->setType($typeActe);
                 }
                 $document->setActive(1);
