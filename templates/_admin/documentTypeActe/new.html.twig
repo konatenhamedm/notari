@@ -23,11 +23,10 @@
 
                             {% for data in type %}
                                 <option value="{{ data.id }}"
-                                        {% if loop.first %}selected="selected"{% endif %}>{{ data.titre }}</option>
+                                        {% if loop.first %}selected="selected"{% endif %}>{{ data.titre }}
+                                </option>
                             {% endfor %}
-                            {#<option value="2">Acte de constitution</option>#}
-                            {# <option value="3">Third</option>
-                             <option value="4"  selected="selected">Fourth</option>#}
+
                         </select>
                     </div>
                     <div class="col-md-4">
