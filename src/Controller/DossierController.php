@@ -432,7 +432,7 @@ class DossierController extends AbstractController
                 elseif ($etape == 7){
                     $dossier->setEtape("Classification");
                 }
-                elseif ($etape == 7){
+                elseif ($etape == 8){
                     $dossier->setEtape("Archive");
                     $dossier->setEtat(1);
                 }
