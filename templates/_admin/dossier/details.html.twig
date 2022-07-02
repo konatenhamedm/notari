@@ -6,6 +6,7 @@
 {% from '_admin/macros/redaction.html.twig' import redaction %}
 {% from '_admin/macros/obtention.html.twig' import obtention %}
 {% from '_admin/macros/remise.html.twig' import remise %}
+{% from '_admin/macros/remiseActe.html.twig' import remiseActe %}
 
 {% block style %}
 <style>
@@ -264,6 +265,34 @@
                                     <h2 class="libelleVide6">Veillez s'il vous plaît terminer les/l étape(s) précédente(s)</h2>
 
                                     <div class="step-66">
+                                         <span class="col-lg-12 acte" id="acte"
+                                               data-prototype="{{ remiseActe(form.remiseActes.vars.prototype)|e('html_attr') }}">
+
+                                  <h3 style="color: orangered">Remise de l'acte</h3>
+                                {#<div class="col-md-12">
+                                    <a href="#" class="btn btn-secondary add_enregistrement" style="margin-left: -20px"
+                                       data-card-tool="remove"
+                                       data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Remove Card">Ajouter une
+                                        document </a>
+                                </div>#}
+                                             {% for row in form.remiseActes %}
+                                                 <span class="container col-md-12">
+                                        {{ remiseActe(row|e) }}
+
+                                    </span>
+                                             {% endfor %}
+                     <input class="after" type="hidden"/>
+                            </span>
+
+                                    </div>
+                                </div>
+                                <div id="step-7"
+                                     class="">
+
+                                    <h2 class="libelleVide7">Veillez s'il vous plaît terminer les/l étape(s) précédente(s)</h2>
+
+                                    <div class="step-77">
                                          <span class="col-lg-12 obtention" id="obtention"
                                                data-prototype="{{ obtention(form.obtentions.vars.prototype)|e('html_attr') }}">
 
@@ -286,12 +315,12 @@
 
                                     </div>
                                 </div>
-                                <div id="step-7"
+                                <div id="step-8"
                                      class="" >
 
-                                    <h2 class="libelleVide7">Veillez s'il vous plaît terminer les/l étape(s) précédente(s)</h2>
+                                    <h2 class="libelleVide8">Veillez s'il vous plaît terminer les/l étape(s) précédente(s)</h2>
 
-                                    <div  class="step-77" >
+                                    <div  class="step-88" >
                                          <span class="col-lg-12 remise" id="remise"
                                                data-prototype="{{ remise(form.remises.vars.prototype)|e('html_attr') }}">
 
@@ -321,12 +350,12 @@
                                         {# {% endif %}#}
                                     </div>
                                 </div>
-                                <div id="step-8"
+                                <div id="step-9"
                                      class="" >
 
-                                    <h2 class="libelleVide8">Veillez s'il vous plaît terminer les/l étape(s) précédente(s)</h2>
+                                    <h2 class="libelleVide9">Veillez s'il vous plaît terminer les/l étape(s) précédente(s)</h2>
 
-                                    <div  class="step-88" >
+                                    <div  class="step-99" >
                                         <h3>Classification du dossier</h3>
                                         {% include '_admin/etapes/contenu.html.twig' %}
                                     </div>
@@ -365,6 +394,7 @@
     <script src="{{ asset('admin/admin/js/pieceVendeur.js') }}"></script>
     <script src="{{ asset('admin/admin/js/obtention.js') }}"></script>
     <script src="{{ asset('admin/admin/js/remise.js') }}"></script>
+    <script src="{{ asset('admin/admin/js/remiseActe.js') }}"></script>
 
     <!-- INTERNAL File-Uploads Js-->
     <script src="{{ asset('admin/assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>

@@ -26,6 +26,7 @@ if($('#libelleEtape').val() === "Identification du client"){
     $('#obtention_valider').hide()
     $('#remise_valider').hide()
     $('#classification_valider').hide()
+    $('#remise_acte').hide()
    // $('#enr').hide()
     //$('.libelleVide').show()
 }else if($('#libelleEtape').val() === "Recueil des pièces" ) {
@@ -36,6 +37,7 @@ if($('#libelleEtape').val() === "Identification du client"){
     $('.libelleVide6').show()
     $('.libelleVide7').show()
     $('.libelleVide8').show()
+    $('.libelleVide9').show()
     $('.sw-btn-next').click()
     $('.step-22').show()
     $('.step-33').hide()
@@ -44,6 +46,7 @@ if($('#libelleEtape').val() === "Identification du client"){
     $('.step-66').hide()
     $('.step-77').hide()
     $('.step-88').hide()
+    $('.step-99').hide()
     $('#piece_valider').show()
     $('#signer').hide()
     $('#ident').hide()
@@ -52,6 +55,7 @@ if($('#libelleEtape').val() === "Identification du client"){
     $('#obtention_valider').hide()
     $('#remise_valider').hide()
     $('#classification_valider').hide()
+    $('#remise_acte').hide()
 }
 else if($('#libelleEtape').val() === "Redaction" ) {
 
@@ -62,6 +66,7 @@ else if($('#libelleEtape').val() === "Redaction" ) {
     $('.libelleVide6').show()
     $('.libelleVide7').show()
     $('.libelleVide8').show()
+    $('.libelleVide9').show()
     $('.step-22').show()
     $('.sw-btn-next').click()
     $('.sw-btn-next').click()
@@ -71,6 +76,7 @@ else if($('#libelleEtape').val() === "Redaction" ) {
     $('.step-66').hide()
     $('.step-77').hide()
     $('.step-88').hide()
+    $('.step-99').hide()
     $('#piece_valider').hide()
     $('#signer').hide()
     $('#enr').hide()
@@ -78,6 +84,7 @@ else if($('#libelleEtape').val() === "Redaction" ) {
     $('#obtention_valider').hide()
     $('#remise_valider').hide()
     $('#classification_valider').hide()
+    $('#remise_acte').hide()
 }
 else if($('#libelleEtape').val() === "Signature" ) {
 
@@ -105,6 +112,7 @@ else if($('#libelleEtape').val() === "Signature" ) {
     $('#obtention_valider').hide()
     $('#remise_valider').hide()
     $('#classification_valider').hide()
+    $('#remise_acte').hide()
 }
 else if($('#libelleEtape').val() === "Enregistrement") {
     $('.libelleVide2').hide()
@@ -132,8 +140,10 @@ else if($('#libelleEtape').val() === "Enregistrement") {
     $('#obtention_valider').hide()
     $('#remise_valider').hide()
     $('#classification_valider').hide()
+    $('#acte').hide()
 }
-else if($('#libelleEtape').val() === "Obtention") {
+
+else if($('#libelleEtape').val() === "Acte") {
     $('.libelleVide2').hide()
     $('.libelleVide3').hide()
     $('.libelleVide4').hide()
@@ -141,6 +151,7 @@ else if($('#libelleEtape').val() === "Obtention") {
     $('.libelleVide6').hide()
     $('.libelleVide7').show()
     $('.libelleVide8').show()
+    $('.libelleVide9').show()
     $('.step-22').show()
     $('.step-33').show()
     $('.step-44').show()
@@ -153,6 +164,39 @@ else if($('#libelleEtape').val() === "Obtention") {
     $('.step-66').show()
     $('.step-77').hide()
     $('.step-88').hide()
+    $('.step-99').hide()
+    $('#piece_valider').hide()
+    $('#signer').hide()
+    $('#enr').hide()
+    $('#redaction_valider').hide()
+    $('#obtention_valider').hide()
+    $('#remise_valider').hide()
+    $('#classification_valider').hide()
+    $('#remise_acte').show()
+}
+else if($('#libelleEtape').val() === "Obtention") {
+    $('.libelleVide2').hide()
+    $('.libelleVide3').hide()
+    $('.libelleVide4').hide()
+    $('.libelleVide5').hide()
+    $('.libelleVide6').hide()
+    $('.libelleVide7').hide()
+    $('.libelleVide8').show()
+    $('.libelleVide9').show()
+    $('.step-22').show()
+    $('.step-33').show()
+    $('.step-44').show()
+    $('.step-55').show()
+    $('.sw-btn-next').click()
+    $('.sw-btn-next').click()
+    $('.sw-btn-next').click()
+    $('.sw-btn-next').click()
+    $('.sw-btn-next').click()
+    $('.sw-btn-next').click()
+    $('.step-66').show()
+    $('.step-77').show()
+    $('.step-88').hide()
+    $('.step-99').hide()
     $('#piece_valider').hide()
     $('#signer').hide()
     $('#enr').hide()
@@ -160,6 +204,7 @@ else if($('#libelleEtape').val() === "Obtention") {
     $('#obtention_valider').show()
     $('#remise_valider').hide()
     $('#classification_valider').hide()
+    $('#remise_acte').hide()
 }
 else if($('#libelleEtape').val() === "Remise") {
     $('.libelleVide2').hide()
@@ -169,6 +214,7 @@ else if($('#libelleEtape').val() === "Remise") {
     $('.libelleVide6').hide()
     $('.libelleVide7').hide()
     $('.libelleVide8').show()
+    $('.libelleVide9').show()
     $('.step-22').show()
     $('.step-33').show()
     $('.step-44').show()
@@ -182,6 +228,7 @@ else if($('#libelleEtape').val() === "Remise") {
     $('.sw-btn-next').click()
     $('.sw-btn-next').click()
     $('.sw-btn-next').click()
+    $('.sw-btn-next').click()
     $('#piece_valider').hide()
     $('#signer').hide()
     $('#enr').hide()
@@ -189,6 +236,7 @@ else if($('#libelleEtape').val() === "Remise") {
     $('#obtention_valider').hide()
     $('#remise_valider').show()
     $('#classification_valider').hide()
+    $('#remise_acte').hide()
 }
 else if($('#libelleEtape').val() === "Classification") {
     $('.libelleVide2').hide()
@@ -221,6 +269,7 @@ else if($('#libelleEtape').val() === "Classification") {
     $('#obtention_valider').hide()
     $('#remise_valider').hide()
     $('#classification_valider').show()
+    $('#remise_acte').hide()
     $(".readonly").prop("disabled", true);
 
 }
@@ -246,7 +295,7 @@ else if($('#libelleEtape').val() === "Archive") {
     $('#obtention_valider').hide()
     $('#remise_valider').hide()
     $('#classification_valider').hide()
-
+    $('#remise_acte').hide()
 }
 
 $('#dossier_identifications_1_acheteur').closest('span').find('row').hide()

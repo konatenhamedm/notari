@@ -116,6 +116,11 @@ class Dossier
      */
     private $remises;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RemiseActe::class, mappedBy="dossier")
+     */
+    private $remiseActes;
+
 
     public function __construct()
     {
@@ -128,6 +133,7 @@ class Dossier
         $this->redactions = new ArrayCollection();
         $this->obtentions = new ArrayCollection();
         $this->remises = new ArrayCollection();
+        $this->remiseActes = new ArrayCollection();
     }
 
 
@@ -524,6 +530,36 @@ class Dossier
             // set the owning side to null (unless already changed)
             if ($remise->getDossier() === $this) {
                 $remise->setDossier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RemiseActe>
+     */
+    public function getRemiseActes(): Collection
+    {
+        return $this->remiseActes;
+    }
+
+    public function addRemiseActe(RemiseActe $remiseActe): self
+    {
+        if (!$this->remiseActes->contains($remiseActe)) {
+            $this->remiseActes[] = $remiseActe;
+            $remiseActe->setDossier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRemiseActe(RemiseActe $remiseActe): self
+    {
+        if ($this->remiseActes->removeElement($remiseActe)) {
+            // set the owning side to null (unless already changed)
+            if ($remiseActe->getDossier() === $this) {
+                $remiseActe->setDossier(null);
             }
         }
 

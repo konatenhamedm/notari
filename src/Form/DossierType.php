@@ -64,6 +64,18 @@ class DossierType extends AbstractType
                 'prototype' => true,
 
             ])
+            ->add('remiseActes', CollectionType::class, [
+                'entry_type' => RemiseType::class,
+                'entry_options' => [
+                    'label' => false
+                ],
+                'allow_add' => true,
+                'label' => false,
+                'by_reference' => false,
+                'allow_delete' => true,
+                'prototype' => true,
+
+            ])
             ->add('redactions', CollectionType::class, [
                 'entry_type' => RedactionType::class,
                 'entry_options' => [

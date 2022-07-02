@@ -49,28 +49,36 @@ function ajax(etape) {
         }
         else if (etape === 5) {
 
-            lib.val("Obtention")
+            lib.val("Acte")
             $('.step-66').show()
             $('.sw-btn-next').click()
             $('.libelleVide6').hide()
-            $('#obtention_valider').show()
+            $('#remise_acte').show()
         }
         else if (etape === 6) {
 
-            lib.val("Remise")
+            lib.val("Obtention")
             $('.step-77').show()
             $('.sw-btn-next').click()
             $('.libelleVide7').hide()
-            $(".readonly").prop("disabled", true);
-            $('#remise_valider').show()
+            $('#obtention_valider').show()
         }
         else if (etape === 7) {
 
-            lib.val("Classification")
+            lib.val("Remise")
             $('.step-88').show()
             $('.sw-btn-next').click()
-            $(".readonly").prop("disabled", true);
             $('.libelleVide8').hide()
+
+            $('#remise_valider').show()
+        }
+        else if (etape === 8) {
+
+            lib.val("Classification")
+            $('.step-99').show()
+            $('.sw-btn-next').click()
+            $(".readonly").prop("disabled", true);
+            $('.libelleVide9').hide()
             $('#classification_valider').show()
         }
 
@@ -113,21 +121,27 @@ $('#enr').click(function (event) {
     const btn = $(this);
     btn.hide();
 })
-$('#obtention_valider').click(function (event) {
+$('#remise_acte').click(function (event) {
     event.preventDefault();
     ajax(6)
     const btn = $(this);
     btn.hide();
 })
-$('#remise_valider').click(function (event) {
+$('#obtention_valider').click(function (event) {
     event.preventDefault();
     ajax(7)
     const btn = $(this);
     btn.hide();
 })
-$('#classification_valider').click(function (event) {
+$('#remise_valider').click(function (event) {
     event.preventDefault();
     ajax(8)
+    const btn = $(this);
+    btn.hide();
+})
+$('#classification_valider').click(function (event) {
+    event.preventDefault();
+    ajax(9)
     const btn = $(this);
     btn.hide();
 })

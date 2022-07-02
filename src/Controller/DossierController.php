@@ -146,6 +146,7 @@ class DossierController extends AbstractController
             $redaction = $form->get('redactions')->getData();
             $remise = $form->get('remises')->getData();
             $obtention = $form->get('obtentions')->getData();
+            $remiseActe = $form->get('remiseActes')->getData();
             $statut = 0;
             if ($form->isValid()) {
 
@@ -156,6 +157,7 @@ class DossierController extends AbstractController
                 $this->saveFile($redaction);
                 $this->saveFile($remise);
                 $this->saveFile($obtention);
+                $this->saveFile($remiseActe);
 
 
                 $em->persist($dossier);
@@ -424,15 +426,18 @@ class DossierController extends AbstractController
                     $dossier->setEtape("Enregistrement");
                 }
                 elseif ($etape == 5){
-                    $dossier->setEtape("Obtention");
+                    $dossier->setEtape("Acte");
                 }
                 elseif ($etape == 6){
-                    $dossier->setEtape("Remise");
+                    $dossier->setEtape("Obtention");
                 }
                 elseif ($etape == 7){
-                    $dossier->setEtape("Classification");
+                    $dossier->setEtape("Remise");
                 }
                 elseif ($etape == 8){
+                    $dossier->setEtape("Classification");
+                }
+                elseif ($etape == 9){
                     $dossier->setEtape("Archive");
                     $dossier->setEtat(1);
                 }
