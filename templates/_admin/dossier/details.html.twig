@@ -416,27 +416,6 @@
             },
             success: function (data, status, $xhr, $form) {
                 const url = data.url;
-
-
-                const currentTab = url.current_tab;
-                const $link = $(url.tab)
-
-                $link.removeClass('inactive');
-                if (!$link.data('href')) {
-                    $link.attr('data-href', url.url);
-                }
-
-         /*       load_tab($link);
-
-
-
-                if (currentTab && currentTab.url && currentTab.tab) {
-
-                    const $oldLink = $(currentTab.tab);
-                    $oldLink.removeData('href');
-                    $oldLink.attr('data-href', currentTab.url);
-                }*/
-
             }
         });
     });

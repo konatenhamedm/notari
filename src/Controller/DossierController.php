@@ -167,13 +167,13 @@ class DossierController extends AbstractController
 
             }
 
-            if ($isAjax) {
-                return $this->json(compact('statut', 'message', 'redirect'));
-            } else {
+           // if ($isAjax) {
+                //return $this->json(compact('statut', 'message', 'redirect'));
+          //  } else {
                 if ($statut == 1) {
                     return $this->redirect($redirect);
                 }
-            }
+           // }
         }
 
         return $this->render('_admin/dossier/details.html.twig', [
