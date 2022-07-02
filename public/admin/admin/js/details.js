@@ -224,7 +224,7 @@ else if($('#libelleEtape').val() === "Classification") {
     $(".readonly").prop("disabled", true);
 
 }
-else if($('#libelleEtape').val() === "Archive") {
+else if($('#libelleEtape').val() === "Dossier classifie") {
     $('.libelleVide2').hide()
     $('.libelleVide3').hide()
     $('.libelleVide4').hide()
